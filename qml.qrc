@@ -1,0 +1,46 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/CPBusyIndicator.qml</file>
+        <file>qml/CPBusyIndicatorEKr.qml</file>
+        <file>qml/CPBusyIndicatorStyle.qml</file>
+        <file>qml/CPBusyIndicatorStyleEKr.qml</file>
+        <file>qml/CPButton.qml</file>
+        <file>qml/CPDescContradictionMatrix.qml</file>
+        <file>qml/CPImage.qml</file>
+        <file>qml/CPImageView.qml</file>
+        <file>qml/CPListView.qml</file>
+        <file>qml/CPPopup.qml</file>
+        <file>qml/CPSearchBar.qml</file>
+        <file>qml/CPSubtitle.qml</file>
+        <file>qml/CPText.qml</file>
+        <file>qml/CPTextField.qml</file>
+        <file>qml/CPToast.qml</file>
+        <file>qml/LYMargin.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Paper.qml</file>
+        <file>qml/PGBoardData.qml</file>
+        <file>qml/PGBoardNotice.qml</file>
+        <file>qml/PGBoardQnA.qml</file>
+        <file>qml/PGDrawer.qml</file>
+        <file>qml/PGHome.qml</file>
+        <file>qml/PGHome2.qml</file>
+        <file>qml/PGJoinDesk.qml</file>
+        <file>qml/PGJoinEmail.qml</file>
+        <file>qml/PGJoinSNS.qml</file>
+        <file>qml/PGLectureMine.qml</file>
+        <file>qml/PGLectureRecently.qml</file>
+        <file>qml/PGLectureRegular.qml</file>
+        <file>qml/PGLoginDesk.qml</file>
+        <file>qml/PGLoginEmail.qml</file>
+        <file>qml/PGOption.qml</file>
+        <file>qml/PGRoomMyClass.qml</file>
+        <file>qml/PGSplash.qml</file>
+        <file>qml/PGTab1.qml</file>
+        <file>qml/PGTab2.qml</file>
+        <file>qml/PGTab3.qml</file>
+        <file>qml/PGTab4.qml</file>
+        <file>qml/PGVideoPlayer.qml</file>
+        <file>qml/Resources.js</file>
+        <file>qml/Test.qml</file>
+    </qresource>
+</RCC>

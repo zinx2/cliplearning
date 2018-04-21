@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/back_white.png</file>
+        <file>img/close_white.png</file>
+        <file>img/search_white.png</file>
+    </qresource>
+</RCC>
