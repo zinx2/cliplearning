@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cliplearning</string>
+    <string name="app_name">클립러닝</string>
     <string name="app_name_en">cliplearning</string>
     <string name="kakao_app_key">692f1e2e598cab18142f28bca3da2cee</string>
     <string name="kakao_scheme">kakao692f1e2e598cab18142f28bca3da2cee</string>

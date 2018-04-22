@@ -579,7 +579,7 @@ onResume();
         }
 
         requestedSNSType = LoginType.FACEBOOK;
-        List<String> permissionNeeds= Arrays.asList(/*"user_photos, publish_actions", */"email, ");
+        List<String> permissionNeeds= Arrays.asList(/*"user_photos, publish_actions", */"email", "public_profile");
         LoginManager.getInstance().logInWithReadPermissions(MainActivity.this, permissionNeeds);
         LoginManager.getInstance().registerCallback(callbackManager, new
                 FacebookCallback<LoginResult>() {
