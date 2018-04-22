@@ -292,16 +292,16 @@ onResume();
                 Context.MODE_PRIVATE);
     }
 
-//    private static int getAppVersion(Context context) {
-//        try {
-//            PackageInfo packageInfo = context.getPackageManager()
-//                    .getPackageInfo(context.getPackageName(), 0);
-//            return packageInfo.versionCode;
-//        } catch (PackageManager.NameNotFoundException e) {
-//            // should never happen
-//            throw new RuntimeException("Could not get package name: " + e);
-//        }
-//    }
+    private static int getAppVersion(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager()
+                    .getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            // should never happen
+            throw new RuntimeException("Could not get package name: " + e);
+        }
+    }
 
 
     private boolean checkPlayServices() {
@@ -462,7 +462,7 @@ onResume();
                     String result = "";
                     JSONObject jObj = new JSONObject();
                     try {
-                        jObj.put("is_logined", false);
+                        jObj.put("is_logined", 0);
                         jObj.put("error_message", message);
                         result = jObj.toString();
                     } catch (JSONException e) {
@@ -480,7 +480,7 @@ onResume();
                     String result = "";
                     JSONObject jObj = new JSONObject();
                     try {
-                        jObj.put("is_logined", false);
+                        jObj.put("is_logined", 0);
                         jObj.put("error_message", message);
                         result = jObj.toString();
                     } catch (JSONException e) {
@@ -505,7 +505,7 @@ onResume();
                     JSONObject jUserProfile = new JSONObject();
                     try {
 //                        jUserProfile.put("is_logined", false); /* 카카오톡은 매번 이쪽으로 진입. 따라서, false */
-                        jUserProfile.put("is_logined", true);
+                        jUserProfile.put("is_logined", 1);
                         jUserProfile.put("nickname", userProfile.getNickname());
                         jUserProfile.put("email", userProfile.getEmail());
                         jUserProfile.put("thumbnail_image", userProfile.getThumbnailImagePath());
@@ -568,7 +568,7 @@ onResume();
             String result = "";
             JSONObject jUserProfile = new JSONObject();
             try {
-                jUserProfile.put("is_logined", true);
+                jUserProfile.put("is_logined", 1);
                 result = jUserProfile.toString();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -597,7 +597,7 @@ onResume();
                                 JSONObject jUserProfile = new JSONObject();
                                 try {
 //                                    jUserProfile.put("is_logined", false);
-                                    jUserProfile.put("is_logined", true);
+                                    jUserProfile.put("is_logined", 1);
                                     jUserProfile.put("nickname", object.getString("name"));
                                     jUserProfile.put("email", object.getString("email"));
 
@@ -632,7 +632,7 @@ onResume();
                         String result = "";
                         JSONObject jUserProfile = new JSONObject();
                         try {
-                            jUserProfile.put("is_logined", true);
+                            jUserProfile.put("is_logined", 1);
                             jUserProfile.put("error_message", error.toString());
                             result = jUserProfile.toString();
                         } catch (JSONException e) {

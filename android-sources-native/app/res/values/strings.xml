@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">cliplearning</string>
     <string name="app_name_en">cliplearning</string>
-    <string name="kakao_app_key">19f154087dc99157a302510cbf2ba971</string>
-    <string name="kakao_scheme">kakao19f154087dc99157a302510cbf2ba971</string>
+    <string name="kakao_app_key">692f1e2e598cab18142f28bca3da2cee</string>
+    <string name="kakao_scheme">kakao692f1e2e598cab18142f28bca3da2cee</string>
     <string name="kakaolink_host">kakaolink</string>
-    <string name="facebook_app_id">393542747734419</string>
-    <string name="fb_login_protocol_scheme">fb393542747734419</string>
+    <string name="facebook_app_id">1943540989052487</string>
+    <string name="fb_login_protocol_scheme">fb1943540989052487</string>
 
 </resources>

@@ -97,7 +97,7 @@ void Commander::onLoginSuccess(const char* result)
     QJsonDocument jsonDoc = QJsonDocument::fromJson(qresult.toLocal8Bit());
 	QJsonObject jsonObj = jsonDoc.object();
 
-    bool isLogined = jsonObj["is_logined"].toBool();
+    bool isLogined = jsonObj["is_logined"].toInt() > 0 ? true : false;
     m_settings->setLogined(isLogined);
     if(!isLogined)
     {

@@ -57,9 +57,12 @@
                 }
             }
             
+            NSNumber *isLogined = @0;
+            if([uuid length] > 0) isLogined = @1;
+            
             NSDictionary* info = @{
                                    @"id":uuid,
-                                   @"is_logined":@0,
+                                   @"is_logined":isLogined,
                                    @"nickname":name,
                                    @"email":email,
                                    @"profile_image":profileImage,
@@ -96,9 +99,12 @@
         NSString *thumbnailImage = [result propertyForKey:@"thumbnail.image"];
         if(thumbnailImage == nil) thumbnailImage = @"";
         
+        NSNumber *isLogined = @0;
+        if([uuid length] > 0) isLogined = @1;
+        
         NSDictionary* info = @{
                                @"id":uuid,
-                               @"is_logined":@0,
+                               @"is_logined":isLogined,
                                @"nickname":name,
                                @"email":email,
                                @"profile_image":profileImage,
