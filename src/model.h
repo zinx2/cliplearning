@@ -58,6 +58,7 @@ class Model : public QObject
     Q_PROPERTY(QString error READ error WRITE setError NOTIFY errorChanged)
     Q_PROPERTY(bool blockedDrawer READ blockedDrawer WRITE setBlockedDrawer NOTIFY blockedDrawerChanged)
     Q_PROPERTY(bool openedDrawer READ openedDrawer WRITE setOpenedDrawer NOTIFY openedDrawerChanged)
+    Q_PROPERTY(bool fullScreen READ fullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
 
 public:
     static Model* getInstance() {
@@ -76,6 +77,7 @@ public:
     Q_INVOKABLE QString error() const { return m_error; }
     Q_INVOKABLE bool blockedDrawer()  const { return m_blockedDrawer; }
     Q_INVOKABLE bool openedDrawer()  const { return m_openedDrawer; }
+    Q_INVOKABLE bool fullScreen()  const { return m_fullScreen; }
 
 
 public slots:
@@ -108,6 +110,7 @@ public slots:
     void setError(const QString m) { m_error = m; emit errorChanged(); }
     void setBlockedDrawer(const bool &m) { m_blockedDrawer = m; emit blockedDrawerChanged(); }
     void setOpenedDrawer(const bool &m) { m_openedDrawer = m; emit openedDrawerChanged(); }
+    void setFullScreen(const bool &m) { m_fullScreen = m; emit fullScreenChanged(); }
 
 signals:
     void listChanged();
@@ -116,6 +119,7 @@ signals:
     void errorChanged();
     void blockedDrawerChanged();
     void openedDrawerChanged();
+    void fullScreenChanged();
 
 private:
     static Model* m_instance;
@@ -127,4 +131,5 @@ private:
     QString m_error = "ERROR";
     bool m_blockedDrawer = false;
     bool m_openedDrawer = false;
+    bool m_fullScreen = false;
 };

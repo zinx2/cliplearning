@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "Resources.js" as R
 
 Rectangle {
   id:btn
@@ -24,7 +23,7 @@ Rectangle {
 
   property int    imageRotation : 0
 
-  property real   sourceSize : R.pt(25)  //아이콘사이즈
+  property real   sourceSize : 0  //아이콘사이즈
   property real   sourceWidth : sourceSize
   property real   sourceHeight : sourceSize
 
@@ -36,7 +35,7 @@ Rectangle {
   property bool  active : true ;
 
   property bool  hoverEnabled: false
-  property int     mouseAreaMargin : -R.MARGIN_XS
+  property int     mouseAreaMargin : -10
   property string type : "text"
   property int   fontSize: 10
   property string textColor: "black"

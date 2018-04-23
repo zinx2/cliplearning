@@ -3,5 +3,19 @@
         <file>img/back_white.png</file>
         <file>img/close_white.png</file>
         <file>img/search_white.png</file>
+        <file>img/full_36dp.png</file>
+        <file>img/full_48dp.png</file>
+        <file>img/full_exit_36dp.png</file>
+        <file>img/full_exit_48dp.png</file>
+        <file>img/next_36dp.png</file>
+        <file>img/next_48dp.png</file>
+        <file>img/pause_36dp.png</file>
+        <file>img/pause_48dp.png</file>
+        <file>img/play_36dp.png</file>
+        <file>img/play_48dp.png</file>
+        <file>img/prev_36dp.png</file>
+        <file>img/prev_48dp.png</file>
+        <file>img/stop_36dp.png</file>
+        <file>img/stop_48dp.png</file>
     </qresource>
 </RCC>

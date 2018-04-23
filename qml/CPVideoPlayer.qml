@@ -75,28 +75,6 @@ Item {
                 width: parent.width
                 height: parent.height - 200 - 200
                 spacing: 10
-
-                CPButton
-                {
-                    id: btnSearch
-                    anchors
-                    {
-                        right: parent.right
-                    }
-
-                    visible: true
-                    width: parent.height
-                    height: parent.height
-                    sourceWidth: 48
-                    sourceHeight: 48
-                    imageSource: R.image("search_white.png")
-                    type: "image"
-                    onClicked:
-                    {
-                        evtSearch()
-                    }
-                }
-
                 Button
                 {
                     id: cmdPrev

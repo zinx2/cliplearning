@@ -4,5 +4,6 @@
         <file>CPButton.qml</file>
         <file>CPVideoPlayer.qml</file>
         <file>LYMargin.qml</file>
+        <file>CPText.qml</file>
     </qresource>
 </RCC>
