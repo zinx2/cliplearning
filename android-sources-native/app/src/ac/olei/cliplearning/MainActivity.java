@@ -147,8 +147,8 @@ public class MainActivity extends org.qtproject.qt5.android.bindings.QtActivity
 
     // SharedPreferences에 저장할 때 key 값으로 사용됨.
     private static final String PROPERTY_APP_VERSION = "appVersion";
-    private static final String TAG = "TRIZ";
-    String SENDER_ID = "610302197588";
+    private static final String TAG = "Clip Learning";
+    String SENDER_ID = "249936825830";
 
     GoogleCloudMessaging gcm;
     SharedPreferences prefs;

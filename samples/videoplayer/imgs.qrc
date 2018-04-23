@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imgs/full_36dp.png</file>
+        <file>imgs/full_48dp.png</file>
+        <file>imgs/full_exit_36dp.png</file>
+        <file>imgs/full_exit_48dp.png</file>
+        <file>imgs/next_36dp.png</file>
+        <file>imgs/next_48dp.png</file>
+        <file>imgs/pause_36dp.png</file>
+        <file>imgs/pause_48dp.png</file>
+        <file>imgs/play_36dp.png</file>
+        <file>imgs/play_48dp.png</file>
+        <file>imgs/prev_36dp.png</file>
+        <file>imgs/prev_48dp.png</file>
+        <file>imgs/stop_36dp.png</file>
+        <file>imgs/stop_48dp.png</file>
+    </qresource>
+</RCC>
