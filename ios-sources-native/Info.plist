@@ -8,8 +8,6 @@
 	<string>cliplearning</string>
 	<key>CFBundleGetInfoString</key>
 	<string>Created by Qt/QMake</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleName</key>
