@@ -88,7 +88,7 @@ Rectangle {
         width: parent.width
         height :  parent.width * 0.5625
         color : "transparent"
-        visible: true
+        visible: false
 
         MouseArea {
             anchors.fill: parent
@@ -100,19 +100,48 @@ Rectangle {
             width: parent.width
             height: parent.height
 
-            LYMargin { height: R.dp(100) }
             Row
             {
                 width: parent.width
-                height: parent.height - R.dp(150)
-                spacing: 10
+                height: R.dp(120)
+                CPButton
+                {
+                    id: cmdVolume
+                    anchors
+                    {
+                        right: parent.right
+                        top: parent.top
+                    }
+
+                    width: R.dp(150)
+                    height: R.dp(150)
+                    sourceWidth: R.dp(80)
+                    sourceHeight: R.dp(80)
+                    imageSource: !video.muted ? R.image("volume_on_48dp.png") : R.image("volume_off_48dp.png")
+                    type: "image"
+                    onClicked:
+                    {
+                        video.muted = !video.muted;
+                    }
+                }
+            }
+
+            Rectangle
+            {
+                width: parent.width
+                height: parent.height - R.dp(170)
+                color: "transparent"
                 CPButton
                 {
                     id: cmdPrev
-
+                    anchors
+                    {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                    }
                     visible: true
                     width: R.dp(200)
-                    height: parent.height
+                    height: R.dp(200)
                     sourceWidth: R.dp(100)
                     sourceHeight: R.dp(100)
                     imageSource: R.image("prev_48dp.png")
@@ -125,53 +154,30 @@ Rectangle {
                 CPButton
                 {
                     id: cmdPlay1
-
-                    visible: true
-                    width: parent.width - R.dp(400)
-                    height: parent.height
-                    sourceWidth: R.dp(100)
-                    sourceHeight: R.dp(100)
+                    anchors
+                    {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                    width: R.dp(300)
+                    height: R.dp(300)
+                    sourceWidth: R.dp(150)
+                    sourceHeight: R.dp(150)
                     imageSource: R.image("play_48dp.png")
                     type: "image"
                     onClicked: play();
                 }
 
-                //                Button
-                //                {
-                //                    id: cmdStop1
-                //                    width: 200
-                //                    height: 300
-                //                    text: "STOP"
-                //                    onClicked: stop();
-                //                    style: ButtonStyle {
-                //                            background: Rectangle {
-                //                                implicitWidth: 300
-                //                                implicitHeight: 300
-                //                                color: "#F6E8D6"
-                //                            }
-                //                        }
-                //                }
-                //                Button
-                //                {
-                //                    id: cmdFull
-                //                    width: 200
-                //                    height: 300
-                //                    text: "FULL"
-                //                    onClicked: expend();
-                //                    style: ButtonStyle {
-                //                            background: Rectangle {
-                //                                implicitWidth: 300
-                //                                implicitHeight: 300
-                //                                color: "#F6E8D6"
-                //                            }
-                //                        }
-                //                }
                 CPButton
                 {
                     id: cmdNext
-                    visible: true
+                    anchors
+                    {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                    }
                     width: R.dp(200)
-                    height: parent.height
+                    height: R.dp(200)
                     sourceWidth: R.dp(100)
                     sourceHeight: R.dp(100)
                     imageSource: R.image("next_48dp.png")
@@ -291,27 +297,11 @@ Rectangle {
                             drag.axis: Drag.XAxis
                             drag.minimumX: 0
                             drag.maximumX: parent.width - R.dp(60)
-                            onPositionChanged:
-                            {
-
-                                if(mouseX > seekBar.width) return;
-                                else if(mouseX > seekBar.width - seek.width) seek.x = seekBar.width - seek.width;
-                                else seek.x = mouseX;
-                                video.seek(parseInt(video.duration * (seek.x / seekBar.width)))
-                            }
-
-                            onPressed:
-                            {
-                                if(mouseX > seekBar.width) return;
-                                else if(mouseX > seekBar.width - seek.width) seek.x = seekBar.width - seek.width;
-                                else seek.x = mouseX;
-                                video.seek(parseInt(video.duration * (seek.x / seekBar.width)))
-                            }
+                            onPositionChanged: seek()
+                            onPressed: seek()
                         }
                     }
                 }
-
-
             }
         }
     }
@@ -321,117 +311,232 @@ Rectangle {
         id: controllBigArea
         width: parent.width
         height : parent.height
-        visible: false
+        color : "transparent"
+        visible: true
 
         MouseArea {
             anchors.fill: parent
             onClicked: hideCtrlArea();
         }
 
-        Column
+        Row
         {
-            rotation: -90
-            width: parent.height
-            height: parent.width
+//            rotation: 90
+            width: parent.width
+            height: parent.height
 
-            Row
+            Rectangle
             {
-                width: parent.width
-
-            }
-            Row
-            {
-                width: parent.width
-                height: 300
-                spacing: 10
-                Button
+                color:"transparent"
+//                rotation: -90
+                 width: R.dp(120)
+                height: parent.height
+                CPButton
                 {
-                    id: cmdPrev2
-                    width: 300
-                    height: 300
-                    text: "PREV"
-                    onClicked: prev();
-                    style: ButtonStyle {
-                        background: Rectangle {
-                            implicitWidth: 300
-                            implicitHeight: 300
-                            color: "#F6E8D6"
-                        }
+                    id: cmdVolumeBig
+                    rotation: -90
+                    anchors
+                    {
+                        left: parent.left
+                        top: parent.top
+                    }
+
+                    width: R.dp(150)
+                    height: R.dp(150)
+                    sourceWidth: R.dp(80)
+                    sourceHeight: R.dp(80)
+                    imageSource: !video.muted ? R.image("volume_on_48dp.png") : R.image("volume_off_48dp.png")
+                    type: "image"
+                    onClicked:
+                    {
+                        video.muted = !video.muted;
                     }
                 }
-                Button
+            }
+            Rectangle
+            {
+                width: parent.width - R.dp(270)
+                height: parent.height
+                color: "transparent"
+
+                CPButton
                 {
-                    id: cmdPlay2
-                    width: 300
-                    height: 300
-                    text: "PLAY"
+                    id: cmdPrevBig
+                    rotation: -90
+                    anchors
+                    {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                        bottomMargin: R.dp(150)
+                    }
+                    visible: true
+                    width: R.dp(300)
+                    height: R.dp(300)
+                    sourceWidth: R.dp(150)
+                    sourceHeight: R.dp(150)
+                    imageSource: R.image("prev_48dp.png")
+                    type: "image"
+                    onClicked:
+                    {
+
+                    }
+                }
+                CPButton
+                {
+                    id: cmdPlayBig
+                    rotation: -90
+                    anchors
+                    {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+                    width: R.dp(400)
+                    height: R.dp(400)
+                    sourceWidth: R.dp(200)
+                    sourceHeight: R.dp(200)
+                    imageSource: R.image("play_48dp.png")
+                    type: "image"
                     onClicked: play();
-                    style: ButtonStyle {
-                        background: Rectangle {
-                            implicitWidth: 300
-                            implicitHeight: 300
-                            color: "#F6E8D6"
-                        }
-                    }
                 }
-                Button
+
+                CPButton
                 {
-                    id: cmdStop2
-                    width: 300
-                    height: 300
-                    text: "STOP"
-                    onClicked: stop();
-                    style: ButtonStyle {
-                        background: Rectangle {
-                            implicitWidth: 300
-                            implicitHeight: 300
-                            color: "#F6E8D6"
-                        }
+                    id: cmdNextBig
+                    rotation: -90
+                    anchors
+                    {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                        topMargin: R.dp(150)
                     }
-                }
-                Button
-                {
-                    id: cmdShirnk
-                    width: 300
-                    height: 300
-                    text: "Shrink"
-                    onClicked: shrink();
-                    style: ButtonStyle {
-                        background: Rectangle {
-                            implicitWidth: 300
-                            implicitHeight: 300
-                            color: "#F6E8D6"
-                        }
-                    }
-                }
-                Button
-                {
-                    id: cmdNext2
-                    width: 300
-                    height: 300
-                    text: "NEXT"
-                    onClicked: next();
-                    style: ButtonStyle {
-                        background: Rectangle {
-                            implicitWidth: 300
-                            implicitHeight: 300
-                            color: "#F6E8D6"
-                        }
+                    width: R.dp(300)
+                    height: R.dp(300)
+                    sourceWidth: R.dp(150)
+                    sourceHeight: R.dp(150)
+                    imageSource: R.image("next_48dp.png")
+                    type: "image"
+                    onClicked:
+                    {
+
                     }
                 }
             }
-            Row
+
+            Rectangle
             {
-                width: parent.width
-                height: 100
+                color: "transparent"
+                width: R.dp(150)
+                height: parent.height
 
-                Text
+                Row
                 {
+                    width: parent.width
+                    height: parent.height
+                    Rectangle
+                    {
+                        height: parent.height
+                        width: R.dp(20)
+                        color: "transparent"
 
+                        CPText
+                        {
+                            id: currentTime1
+                            rotation: -90
+                            text: "재생시간"//R.toTime(video.position)
+                            color: "white"
+                            font.pointSize: R.pt(12)
+                            anchors
+                            {
+                                left: parent.left
+                                leftMargin: R.dp(-10)
+                                bottom: parent.bottom
+                                bottomMargin: R.dp(80)
+                            }
+                        }
+
+                        CPButton
+                        {
+                            id:cmdFullbig
+                            anchors
+                            {
+                                left: parent.left
+                                leftMargin: R.dp(-40)
+                                top: parent.tops
+                                topMargin: R.dp(20)
+                            }
+
+                            width: R.dp(150)
+                            height: R.dp(150)
+                            sourceWidth: R.dp(120)
+                            sourceHeight: R.dp(120)
+                            imageSource: R.image("full_exit_48dp.png")
+                            type: "image"
+                            onClicked:expend();
+                        }
+
+                        CPText
+                        {
+                            rotation: -90
+                            text: "총 재생시간" //R.toTime(video.duration)//"총 재생시간"
+                            color: "white"
+                            font.pointSize: R.pt(12)
+                            anchors
+                            {
+                                left: parent.left
+                                leftMargin: R.dp(-30)
+                                top: cmdFullbig.bottom
+                                topMargin: R.dp(60)
+                            }
+                        }
+                    }
+
+                    Rectangle
+                    {
+                        id: ctrlSeekBig
+                        width: R.dp(50)
+                        height: parent.height
+                        color : "transparent"
+                        anchors
+                        {
+                            left: parent.left
+                            leftMargin: R.dp(100)
+                        }
+                        Rectangle
+                        {
+                            id: seekBarBig
+
+                            width: R.dp(10)
+                            height: parent.height
+                            color: "red"
+                        }
+
+                        Rectangle
+                        {
+                            id: seekBig
+                            y: parent.height - R.dp(40)
+                            x: R.dp(-15)
+                            radius: width*0.5
+                            width: R.dp(40)
+                            height: R.dp(40)
+                            color: "red"
+                        }
+
+//                        MouseArea
+//                        {
+//                            anchors.fill: parent
+//                            drag.target: seek
+//                            drag.axis: Drag.XAxis
+//                            drag.minimumX: 0
+//                            drag.maximumX: parent.width - R.dp(60)
+//                            onPositionChanged: seek()
+//                            onPressed: seek()
+//                        }
+                    }
                 }
             }
         }
     }
+
 
     Rectangle
     {
@@ -539,5 +644,13 @@ Rectangle {
         controllSmallArea.visible = false;
         controllBigArea.visible = false;
         bgCtrl.visible = false;
+    }
+
+    function seek()
+    {
+        if(mouseX > seekBar.width) return;
+        else if(mouseX > seekBar.width - seek.width) seek.x = seekBar.width - seek.width;
+        else seek.x = mouseX;
+        video.seek(parseInt(video.duration * (seek.x / seekBar.width)))
     }
 }

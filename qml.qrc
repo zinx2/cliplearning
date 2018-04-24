@@ -42,5 +42,6 @@
         <file>qml/PGVideoPlayer.qml</file>
         <file>qml/Resources.js</file>
         <file>qml/Test.qml</file>
+        <file>qml/PGPlayerController.qml</file>
     </qresource>
 </RCC>
