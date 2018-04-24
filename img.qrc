@@ -17,5 +17,9 @@
         <file>img/prev_48dp.png</file>
         <file>img/stop_36dp.png</file>
         <file>img/stop_48dp.png</file>
+        <file>img/volume_off_36dp.png</file>
+        <file>img/volume_off_48dp.png</file>
+        <file>img/volume_on_36dp.png</file>
+        <file>img/volume_on_48dp.png</file>
     </qresource>
 </RCC>

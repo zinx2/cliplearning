@@ -7,6 +7,19 @@ function font(name) { return "../font/" + name }
 function qml() { return "../qml/" + name }
 function os() { return Qt.platform.os; }
 
+function toTime(mSecs)
+{
+    var hours = parseInt((mSecs / (1000*60*60))%24);
+    var minutes = parseInt((mSecs / (1000*60))%60);
+    var seconds = parseInt(mSecs / (1000)%60);
+
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return hours + ":" + minutes + ":" + seconds;
+}
+
 var height_titlaBar = dp(144);
 var height_button_middle = dp(144);
 
