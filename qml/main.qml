@@ -12,7 +12,13 @@ ApplicationWindow
         visible: true
     visibility: md.fullScreen ? Window.FullScreen : Window.AutomaticVisibility
 
-    PGVideoPlayer
+//    PGVideoPlayer
+//    {
+//        width: parent.width
+//        height: parent.height
+//    }
+
+    Test
     {
         width: parent.width
         height: parent.height

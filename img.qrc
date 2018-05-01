@@ -21,5 +21,14 @@
         <file>img/volume_off_48dp.png</file>
         <file>img/volume_on_36dp.png</file>
         <file>img/volume_on_48dp.png</file>
+        <file>img/test1.png</file>
+        <file>img/test2.png</file>
+        <file>img/test3.png</file>
+        <file>img/test4.png</file>
+        <file>img/test5.png</file>
+        <file>img/test6.png</file>
+        <file>img/test7.png</file>
+        <file>img/test8.png</file>
+        <file>img/test9.png</file>
     </qresource>
 </RCC>
