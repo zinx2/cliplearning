@@ -183,7 +183,7 @@ void NetWorker::getDummyAll()
                        QObject* o = qobject_cast<QObject*>(d);
                        m_model->addDummy(o);
                    }
-
+                    qDebug() << m_model->dlist().size();
                    /********** CLEAR QNetworkReply INSTANCE **********/
                    m_netReply->deleteLater();
                });
