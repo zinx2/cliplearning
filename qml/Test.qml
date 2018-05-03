@@ -10,8 +10,24 @@ Rectangle {
 
     Component.onCompleted:
     {
-
+        wk.getDummyAll();
+        console.log("@@Length : " + md.dlist.length);
+        console.log("@@Size : " + md.dlist.size);
+        console.log("@@Count : " + md.dlist.count);
     }
+
+//    Timer
+//    {
+//        running: true;
+//        repeat: true;
+//        interval: 1000;
+//        onTriggered:
+//        {
+//            console.log("@@Length : " + md.dlist.length);
+//            console.log("@@Size : " + md.dlist.size);
+//            console.log("@@Count : " + md.dlist.count);
+//        }
+//    }
 
     Flickable
     {
@@ -36,12 +52,12 @@ Rectangle {
                 {
                     width: parent.width
                     height: R.dp(500)
-                    color: md.dlist[index].c
+                    color: md.dlist[index].bgColor
                     CPImage
                     {
                         width: R.dp(500)
                         height: R.dp(500)
-                        source: R.image(md.dlist[index].s)
+                        source: "image://async/" + md.dlist[index].imgUrl
                         anchors
                         {
                             horizontalCenter: parent.horizontalCenter
@@ -74,7 +90,7 @@ Rectangle {
                             from: 0;
                             to: 0.5;
                             duration: 500;
-                            running: md.dlist[index].b;
+                            running: md.dlist[index].clicked;
                             onStopped: {
                                 clearButtons();
                             }
@@ -88,7 +104,7 @@ Rectangle {
                         color: "transparent"
                         CPText
                         {
-                            text: md.dlist[index].s;
+                            text: md.dlist[index].title;
                             color: "white"
                         }
                     }
@@ -101,7 +117,7 @@ Rectangle {
                         onClicked:
                         {
                             clearButtons();
-                            md.dlist[index].setB(true);
+                            md.dlist[index].isClicked(true);
                         }
 
                     }
@@ -120,23 +136,6 @@ Rectangle {
         }
     }
 
-
-    Component
-    {
-        Item
-        {
-            Rectangle
-            {
-            CPImage {
-                source: imgPath
-                height : viewPager.height;
-                width: viewPager.width
-                fillMode: Image.PreserveAspectFit
-                clip: true
-            }
-            }
-        }
-    }
 
     //    CPButton
     //    {
@@ -206,7 +205,7 @@ Rectangle {
     {
         for(var i=0; i<md.dlist.length; i++)
         {
-            md.dlist[i].setB(false);
+            md.dlist[i].isClicked(false);
         }
 
 

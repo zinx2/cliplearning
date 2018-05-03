@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 
 	Model *model = Model::getInstance();
     NetWorker *wk = NetWorker::getInstance();
+//    wk->getDummyAll();
     Commander *cmd = Commander::getInstance();
     Settings *settings = Settings::getInstance();
 

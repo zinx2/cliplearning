@@ -31,6 +31,7 @@ public:
 	void getDemo(int id);	
 	void postDemoAll();
 	void postDemo(int id);
+    void getDummyAll();
 	
 
 private:
@@ -50,6 +51,6 @@ private:
 	QMutex m_mtx;
 	QUrlQuery m_queries;
 
-    const QString DOMAIN_NAME = "http://172.18.41.12:8080/";
+    const QString DOMAIN_NAME = "http://favorite.cafe24app.com";
 };
 

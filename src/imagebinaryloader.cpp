@@ -11,6 +11,7 @@ void ImageBinaryLoader::requestImage(QString urlStr, QMutex* mtx)
 {
 	m_mtx = mtx;
 	QUrl url(DOMAIN_NAME + "img/" + urlStr);
+    qDebug() << DOMAIN_NAME + "img/" + urlStr;
 	QNetworkRequest request(url);
 
 	m_netReply = m_netManager.get(request);

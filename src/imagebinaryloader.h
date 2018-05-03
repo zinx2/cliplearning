@@ -23,7 +23,7 @@ private:
 	QNetworkReply* m_netReply;
 
 	QByteArray m_binary;
-    const QString DOMAIN_NAME = "http://172.18.41.12:8080/";
+    const QString DOMAIN_NAME = "http://favorite.cafe24app.com/";
 
 	QMutex* m_mtx;
 	bool m_notFound = false;
