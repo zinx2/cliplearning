@@ -12,11 +12,11 @@ import "Resources.js" as R
 //        visible: true
 //    visibility: md.fullScreen ? Window.FullScreen : Window.AutomaticVisibility
 
-//    PGVideoPlayer
-//    {
-//        width: parent.width
-//        height: parent.height
-//    }
+////    PGVideoPlayer
+////    {
+////        width: parent.width
+////        height: parent.height
+////    }
 
 //    Test
 //    {
@@ -37,6 +37,13 @@ ApplicationWindow {
         if(cmd.isOnline())
         {
             fadeoutTimer.running = true;
+
+
+            wk.getImageAll();
+            wk.getCategoryAll();
+            wk.getColorAll();
+            wk.getDummyAll();
+            wk.request();
             return;
         }
         toast("네트워크가 연결되어 있지 않습니다. 네트워크 상태를 확인해주세요.");

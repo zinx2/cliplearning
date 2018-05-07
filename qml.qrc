@@ -43,5 +43,7 @@
         <file>qml/Resources.js</file>
         <file>qml/Test.qml</file>
         <file>qml/PGPlayerController.qml</file>
+        <file>qml/CPButtonToggleTab.qml</file>
+        <file>qml/PGCourseDesk.qml</file>
     </qresource>
 </RCC>

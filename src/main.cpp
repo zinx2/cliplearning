@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
 //     QtWebEngine::initialize();
 //	QtWebView::initialize();
 
+//    qmlRegisterType<NetWorker>("ac.olei.cliplearning", 1, 0, "NetWorker");
+
 	Option opt; opt.setDs(false);
 
 	Model *model = Model::getInstance();

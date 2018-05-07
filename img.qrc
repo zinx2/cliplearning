@@ -21,14 +21,20 @@
         <file>img/volume_off_48dp.png</file>
         <file>img/volume_on_36dp.png</file>
         <file>img/volume_on_48dp.png</file>
-        <file>img/test1.png</file>
-        <file>img/test2.png</file>
-        <file>img/test3.png</file>
-        <file>img/test4.png</file>
-        <file>img/test5.png</file>
-        <file>img/test6.png</file>
-        <file>img/test7.png</file>
-        <file>img/test8.png</file>
-        <file>img/test9.png</file>
+        <file>img/account_released_36dp.png</file>
+        <file>img/alarm_pressed_36dp.png</file>
+        <file>img/alarm_released_36dp.png</file>
+        <file>img/home_pressed_36dp.png</file>
+        <file>img/home_released_36dp.png</file>
+        <file>img/search_pressed_36dp.png</file>
+        <file>img/search_released_36dp.png</file>
+        <file>img/noitem_released_24dp.png</file>
+        <file>img/noitem_pressed_24dp.png</file>
+        <file>img/noimage.png</file>
+        <file>img/favorite_pressed_36dp.png</file>
+        <file>img/favorite_released_36dp.png</file>
+        <file>img/menu_36dp.png</file>
+        <file>img/settings_36dp.png</file>
+        <file>img/account_pressed_36dp.png</file>
     </qresource>
 </RCC>

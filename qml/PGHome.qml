@@ -6,17 +6,26 @@ import "Resources.js" as R
 Paper {
     id: mainView
     visibleBackBtn: false
+    backImg: R.image("menu_36dp.png")
     visibleSearchBtn: true
-    titleText: "e-koreatech"
+    titleText: "<font color='" + R.color_theme01 +"'>Clip</font>" +"<font color='black'> Learning</font>"
+    titleBgColor: "transparent"
 
     property bool initTab1 : false
     property bool initTab2 : false
     property bool initTab3 : false
     property bool initTab4 : false
+    property int tabHeight : R.dp(150)
+    property int tLength : opt.ds ? 5 : md.tablist.length
 
     Component.onCompleted:
     {
         loader.sourceComponent = componentTab1;
+        if(!opt.ds)
+        {
+            md.catelikelist[0].select(true);
+            md.tablist[0].select(true);
+        }
     }
 
     width: opt.ds ? R.design_size_width : homeStackView.width
@@ -27,9 +36,9 @@ Paper {
         id: drawer
         width: parent.width * 2 / 3
         height: parent.height
-        dragMargin : md.blockedDrawer ? R.dp(0) : R.dp(50)
-        position: md.openedDrawer ? 1.0 : 0.0
-        interactive: settings.logined
+        dragMargin : opt.ds ? R.dp(50) : (md.blockedDrawer ? R.dp(0) : R.dp(50))
+        position: opt.ds ? 0.0 : (md.openedDrawer ? 1.0 : 0.0)
+        interactive: opt.ds ? true :settings.logined
 
         PGDrawer
         {
@@ -63,374 +72,372 @@ Paper {
     Column
     {
         width: parent.width
-        height: parent.height - (R.height_titlaBar + 1)
-        y: R.height_titlaBar + 1
-        spacing: 1
+        height: parent.height
+        z: 1
+        //        ListModel {
+        //            id: contactModel
+        //            ListElement {
+        //                imgPath: "image://async/img021.jpg"
+        //            }
+        //            ListElement {
+        //                imgPath: "image://async/img038.jpg"
+        //            }
+        //            ListElement {
+        //                imgPath: "image://async/img039.jpg"
+        //            }
+        //            ListElement {
+        //                imgPath: "image://async/img040.jpg"
+        //            }
+        //        }
 
-//        ListModel {
-//            id: contactModel
-//            ListElement {
-//                imgPath: "image://async/img021.jpg"
-//            }
-//            ListElement {
-//                imgPath: "image://async/img038.jpg"
-//            }
-//            ListElement {
-//                imgPath: "image://async/img039.jpg"
-//            }
-//            ListElement {
-//                imgPath: "image://async/img040.jpg"
-//            }
-//        }
+        //        Rectangle
+        //        {
+        //            id: viewPager
+        //            width: parent.width
+        //            height: R.dp(500)
 
-//        Rectangle
-//        {
-//            id: viewPager
-//            width: parent.width
-//            height: R.dp(500)
+        //            CPBusyIndicatorEKr {
+        //                id: viewPagerBusy
+        //                anchors {
+        //                    left: parent.left
+        //                    leftMargin: parent.width*0.5 - viewPagerBusy.width + R.dp(20)
+        //                    verticalCenter: parent.verticalCenter
+        //                }
+        //            }
 
-//            CPBusyIndicatorEKr {
-//                id: viewPagerBusy
-//                anchors {
-//                    left: parent.left
-//                    leftMargin: parent.width*0.5 - viewPagerBusy.width + R.dp(20)
-//                    verticalCenter: parent.verticalCenter
-//                }
-//            }
-
-//            PathView {
-//                id: pathView
-//                anchors.fill: parent
-//                model: contactModel
-//                delegate: CPImage {
-//                    source: imgPath
-//                    height : viewPager.height;
-//                    width: viewPager.width
-//                    fillMode: Image.PreserveAspectFit
-//                    clip: true
-//                }
+        //            PathView {
+        //                id: pathView
+        //                anchors.fill: parent
+        //                model: contactModel
+        //                delegate: CPImage {
+        //                    source: imgPath
+        //                    height : viewPager.height;
+        //                    width: viewPager.width
+        //                    fillMode: Image.PreserveAspectFit
+        //                    clip: true
+        //                }
 
 
-//                path: Path {
-//                    startX: viewPager.width * (contactModel.count>1 ? -0.5 : 0.5)
-//                    startY: viewPager.height*0.5
-//                    PathLine {
-//                        x: viewPager.width * (contactModel.count>1 ? (contactModel.count - 0.5) : 0.501)
-//                        y: viewPager.height*0.5;
-//                    }
-//                }
-//            }
+        //                path: Path {
+        //                    startX: viewPager.width * (contactModel.count>1 ? -0.5 : 0.5)
+        //                    startY: viewPager.height*0.5
+        //                    PathLine {
+        //                        x: viewPager.width * (contactModel.count>1 ? (contactModel.count - 0.5) : 0.501)
+        //                        y: viewPager.height*0.5;
+        //                    }
+        //                }
+        //            }
 
-//            PageIndicator
-//            {
-//                id: pageIndicator
-//                count: pathView.count
-//                currentIndex: pathView.currentIndex
-//                anchors
-//                {
-//                    bottom: viewPager.bottom
-//                    horizontalCenter: parent.horizontalCenter
-//                    bottomMargin: R.dp(20)
-//                }
-//                delegate: Rectangle {
-//                    implicitWidth: R.dp(25)
-//                    implicitHeight: R.dp(25)
-//                    radius: width
-//                    color: "gray"
-//                    opacity: index === pathView.currentIndex ? 1.0 : pressed ? 0.7 : 0.45
-//                }
-//            }
+        //            PageIndicator
+        //            {
+        //                id: pageIndicator
+        //                count: pathView.count
+        //                currentIndex: pathView.currentIndex
+        //                anchors
+        //                {
+        //                    bottom: viewPager.bottom
+        //                    horizontalCenter: parent.horizontalCenter
+        //                    bottomMargin: R.dp(20)
+        //                }
+        //                delegate: Rectangle {
+        //                    implicitWidth: R.dp(25)
+        //                    implicitHeight: R.dp(25)
+        //                    radius: width
+        //                    color: "gray"
+        //                    opacity: index === pathView.currentIndex ? 1.0 : pressed ? 0.7 : 0.45
+        //                }
+        //            }
 
-//            Timer
-//            {
-//                id: pagerControl
-//                interval:5000
-//                running: true
-//                repeat: true
-//                onTriggered: {
-//                    if(pathView.currentIndex == pathView.count-1)
-//                        pathView.currentIndex = 0;
-//                    else
-//                        pathView.currentIndex += 1;
+        //            Timer
+        //            {
+        //                id: pagerControl
+        //                interval:5000
+        //                running: true
+        //                repeat: true
+        //                onTriggered: {
+        //                    if(pathView.currentIndex == pathView.count-1)
+        //                        pathView.currentIndex = 0;
+        //                    else
+        //                        pathView.currentIndex += 1;
 
-//                    pageIndicator.currentIndex = pathView.currentIndex;
-//                }
-//            }
+        //                    pageIndicator.currentIndex = pathView.currentIndex;
+        //                }
+        //            }
 
-//            Component.onCompleted:
-//            {
-//                if(pathView.count > 0) {
-//                    viewPagerBusy.visible = false;
-//                    viewPagerBusy.running = false;
-//                }
-//            }
-//        }
+        //            Component.onCompleted:
+        //            {
+        //                if(pathView.count > 0) {
+        //                    viewPagerBusy.visible = false;
+        //                    viewPagerBusy.running = false;
+        //                }
+        //            }
+        //        }
 
-//        Row
-//        {
-//            width: parent.width
-//            height: R.height_button_middle
-//            LYMargin
-//            {
-//                width: 1
-//            }
+        //        Row
+        //        {
+        //            width: parent.width
+        //            height: R.height_button_middle
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
 
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "카카오 로그아웃"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    /* DESIGN LOGIC */
-//                    if(opt.ds)
-//                    {
-//                        return; /* PLEASE DON'T REMVOE! */
-//                    }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "카카오 로그아웃"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    /* DESIGN LOGIC */
+        //                    if(opt.ds)
+        //                    {
+        //                        return; /* PLEASE DON'T REMVOE! */
+        //                    }
 
-//                    /* NOT DESIGN LOGIC */
-//                    cmd.logoutKakao();
-//                }
-//            }
+        //                    /* NOT DESIGN LOGIC */
+        //                    cmd.logoutKakao();
+        //                }
+        //            }
 
-//            LYMargin
-//            {
-//                width: 1
-//            }
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
 
-//            CPButton
-//            {
-//                sourceWidth: parent.width  * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "카카오 연결해제"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    /* DESIGN LOGIC */
-//                    if(opt.ds)
-//                    {
-//                        return; /* PLEASE DON'T REMVOE! */
-//                    }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width  * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "카카오 연결해제"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    /* DESIGN LOGIC */
+        //                    if(opt.ds)
+        //                    {
+        //                        return; /* PLEASE DON'T REMVOE! */
+        //                    }
 
-//                    /* NOT DESIGN LOGIC */
-//                    cmd.withdrawKakao();
-//                }
-//            }
-//        }
+        //                    /* NOT DESIGN LOGIC */
+        //                    cmd.withdrawKakao();
+        //                }
+        //            }
+        //        }
 
-//        Row
-//        {
-//            width: parent.width
-//            height: R.height_button_middle
-//            LYMargin
-//            {
-//                width: 1
-//            }
+        //        Row
+        //        {
+        //            width: parent.width
+        //            height: R.height_button_middle
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
 
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 -1
-//                sourceHeight: R.height_button_middle
-//                btnName: "페이스북 로그아웃"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    /* DESIGN LOGIC */
-//                    if(opt.ds)
-//                    {
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 -1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "페이스북 로그아웃"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    /* DESIGN LOGIC */
+        //                    if(opt.ds)
+        //                    {
 
 
 
-//                        return; /* PLEASE DON'T REMVOE! */
-//                    }
+        //                        return; /* PLEASE DON'T REMVOE! */
+        //                    }
 
-//                    /* NOT DESIGN LOGIC */
-//                    cmd.logoutFacebook();
-//                }
-//            }
-//            LYMargin
-//            {
-//                width: 1
-//            }
+        //                    /* NOT DESIGN LOGIC */
+        //                    cmd.logoutFacebook();
+        //                }
+        //            }
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
 
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 -1
-//                sourceHeight: R.height_button_middle
-//                btnName: "페이스북 연결해제"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    /* DESIGN LOGIC */
-//                    if(opt.ds)
-//                    {
-
-
-
-//                        return; /* PLEASE DON'T REMVOE! */
-//                    }
-
-//                    /* NOT DESIGN LOGIC */
-//                    cmd.withdrawFacebook();
-//                }
-//            }
-//        }
-
-
-//        Row
-//        {
-//            width: parent.width
-//            height: R.height_button_middle
-//            LYMargin
-//            {
-//                width: 1
-//            }
-
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "카카오 초대하기"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    /* DESIGN LOGIC */
-//                    if(opt.ds)
-//                    {
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 -1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "페이스북 연결해제"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    /* DESIGN LOGIC */
+        //                    if(opt.ds)
+        //                    {
 
 
 
-//                        return; /* PLEASE DON'T REMVOE! */
-//                    }
+        //                        return; /* PLEASE DON'T REMVOE! */
+        //                    }
 
-//                    /* NOT DESIGN LOGIC */
-//                    cmd.inviteKakao();
-//                }
-//            }
-//            LYMargin
-//            {
-//                width: 1
-//            }
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "페이스북 공유하기"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    /* DESIGN LOGIC */
-//                    if(opt.ds)
-//                    {
+        //                    /* NOT DESIGN LOGIC */
+        //                    cmd.withdrawFacebook();
+        //                }
+        //            }
+        //        }
 
 
+        //        Row
+        //        {
+        //            width: parent.width
+        //            height: R.height_button_middle
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
 
-//                        return; /* PLEASE DON'T REMVOE! */
-//                    }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "카카오 초대하기"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    /* DESIGN LOGIC */
+        //                    if(opt.ds)
+        //                    {
 
-//                    /* NOT DESIGN LOGIC */
-//                    cmd.inviteFacebook();
-//                }
-//            }
-//        }
 
-//        Row
-//        {
-//            width: parent.width
-//            height: R.height_button_middle
-//            LYMargin
-//            {
-//                width: 1
-//            }
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "인디케이터 테스트"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    busy(true);
-//                }
-//            }
-//            LYMargin
-//            {
-//                width: 1
-//            }
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "슬라이드 메뉴 열기"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    drawer.open();
-//                }
-//            }
-//        }
 
-//        Row
-//        {
-//            width: parent.width
-//            height: R.height_button_middle
-//            LYMargin
-//            {
-//                width: 1
-//            }
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "앱존재여부1"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    if(cmd.isInstalledApp("com.kakao.talk"))
-//                        toast("앱이 존재하네요.")
-//                    else
-//                        toast("앱이 없네요.")
-//                }
-//            }
-//            LYMargin
-//            {
-//                width: 1
-//            }
-//            CPButton
-//            {
-//                sourceWidth: parent.width * 0.5 - 1
-//                sourceHeight: R.height_button_middle
-//                btnName: "웹뷰테스트"
-//                rectColor: R.color_buttonColor001
-//                textColor: "white"
-//                onClicked:
-//                {
-//                    homeStackView.push(Qt.createComponent(R.view_file_videoPlayer), { });
-//                    //                    if(cmd.isInstalledApp("com.kakao.talk111"))
-//                    //                        toast("앱이 존재하네요.")
-//                    //                    else
-//                    //                        toast("앱이 없네요.")
+        //                        return; /* PLEASE DON'T REMVOE! */
+        //                    }
 
-//                    //                                 userStackView.push(Qt.createComponent(R.view_file_joinEmail), { });
-//                }
-//            }
-//        }
+        //                    /* NOT DESIGN LOGIC */
+        //                    cmd.inviteKakao();
+        //                }
+        //            }
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "페이스북 공유하기"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    /* DESIGN LOGIC */
+        //                    if(opt.ds)
+        //                    {
+
+
+
+        //                        return; /* PLEASE DON'T REMVOE! */
+        //                    }
+
+        //                    /* NOT DESIGN LOGIC */
+        //                    cmd.inviteFacebook();
+        //                }
+        //            }
+        //        }
+
+        //        Row
+        //        {
+        //            width: parent.width
+        //            height: R.height_button_middle
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "인디케이터 테스트"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    busy(true);
+        //                }
+        //            }
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "슬라이드 메뉴 열기"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    drawer.open();
+        //                }
+        //            }
+        //        }
+
+        //        Row
+        //        {
+        //            width: parent.width
+        //            height: R.height_button_middle
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "앱존재여부1"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    if(cmd.isInstalledApp("com.kakao.talk"))
+        //                        toast("앱이 존재하네요.")
+        //                    else
+        //                        toast("앱이 없네요.")
+        //                }
+        //            }
+        //            LYMargin
+        //            {
+        //                width: 1
+        //            }
+        //            CPButton
+        //            {
+        //                sourceWidth: parent.width * 0.5 - 1
+        //                sourceHeight: R.height_button_middle
+        //                btnName: "웹뷰테스트"
+        //                rectColor: R.color_buttonColor001
+        //                textColor: "white"
+        //                onClicked:
+        //                {
+        //                    homeStackView.push(Qt.createComponent(R.view_file_videoPlayer), { });
+        //                    //                    if(cmd.isInstalledApp("com.kakao.talk111"))
+        //                    //                        toast("앱이 존재하네요.")
+        //                    //                    else
+        //                    //                        toast("앱이 없네요.")
+
+        //                    //                                 userStackView.push(Qt.createComponent(R.view_file_joinEmail), { });
+        //                }
+        //            }
+        //        }
 
         Loader
         {
             id: loader
             width: parent.width
-            height: parent.height /*- R.dp(160)*/
+            height: parent.height - tabHeight
         }
 
         Component
@@ -440,6 +447,12 @@ Paper {
             {
                 width: parent.width
                 height: parent.height
+                Component.onCompleted:
+                {
+                    mainView.titleText = "<font color='" + R.color_theme01 +"'>Clip</font>" +"<font color='black'> Learning</font>"
+                    if(opt.ds) return;
+                    md.setHomeScrolled(false);
+                }
             }
         }
 
@@ -449,7 +462,13 @@ Paper {
             PGTab2
             {
                 width: parent.width
-                height: parent.height - R.dp(160)
+                height: parent.height
+                Component.onCompleted:
+                {
+                    mainView.titleText = "<font color='black'>알림</font>"
+                    if(opt.ds) return;
+                    md.setHomeScrolled(true);
+                }
             }
         }
 
@@ -459,7 +478,13 @@ Paper {
             PGTab3
             {
                 width: parent.width
-                height: parent.height - R.dp(160)
+                height: parent.height
+                Component.onCompleted:
+                {
+                    mainView.titleText = "<font color='black'>검색</font>"
+                    if(opt.ds) return;
+                    md.setHomeScrolled(true);
+                }
             }
         }
 
@@ -469,91 +494,100 @@ Paper {
             PGTab4
             {
                 width: parent.width
-                height: parent.height - R.dp(160)
+                height: parent.height
+                Component.onCompleted:
+                {
+                    mainView.titleText = "<font color='black'>좋아요</font>"
+                    if(opt.ds) return;
+                    md.setHomeScrolled(true);
+                    md.catelikelist[0].select(true);
+
+                    wk.getLikeClipList(0);
+                    wk.request();
+                }
             }
         }
 
         Rectangle
         {
             width: parent.width
-            height: R.dp(160)
+            height: tabHeight
 
             Row
             {
                 width: parent.width
                 height: parent.height
-                spacing: 1
-                CPButton
+
+                Repeater
                 {
-                    sourceWidth: parent.width / 4
-                    sourceHeight: parent.height
-                    btnName: "메뉴1"
-                    rectColor: R.color_buttonColor001
-                    textColor: "white"
-                    onClicked:
+                    model: tLength
+                    CPButtonToggleTab
                     {
-                        /* DESIGN LOGIC */
-                        if(opt.ds)
+                        width: parent.width / tLength
+                        height: tabHeight
+                        title: opt.ds ? "untitled" : (md.tablist[index].title)
+                        fontSize: R.pt(12)
+                        iconWidth: R.dp(96)
+                        iconHeight: R.dp(96)
+                        releasedColor: "black"
+                        pressedColor: R.color_theme01
+                        selected:
                         {
-                            return; /* PLEASE DON'T REMVOE! */
+                            if(opt.ds) return false;
+                            return md.tablist[index].selected;
                         }
-                        loader.sourceComponent = componentTab1;
-                    }
-                }
-                CPButton
-                {
-                    sourceWidth: parent.width / 4
-                    sourceHeight: parent.height
-                    btnName: "메뉴2"
-                    rectColor: R.color_buttonColor001
-                    textColor: "white"
-                    onClicked:
-                    {
-                        /* DESIGN LOGIC */
-                        if(opt.ds)
+                        onEvtSelect:
                         {
-                            return; /* PLEASE DON'T REMVOE! */
+                            if(opt.ds) return;
+
+                            switch(index)
+                            {
+                            case 0: loader.sourceComponent = componentTab1; break;
+                            case 1: loader.sourceComponent = componentTab2; break;
+                            case 2: loader.sourceComponent = componentTab3; break;
+                            case 3: loader.sourceComponent = componentTab4; break;
+                            case 4: loader.sourceComponent = componentTab4; break;
+                            }
+
+                            for(var i=0; i<md.tablist.length; i++)
+                            {
+                                md.tablist[i].select(false);
+                            }
+                            md.tablist[index].select(true);
                         }
-                        loader.sourceComponent = componentTab2;
-                    }
-                }
-                CPButton
-                {
-                    sourceWidth: parent.width / 4
-                    sourceHeight: parent.height
-                    btnName: "메뉴3"
-                    rectColor: R.color_buttonColor001
-                    textColor: "white"
-                    onClicked:
-                    {
-                        /* DESIGN LOGIC */
-                        if(opt.ds)
+
+                        pressedSource:
                         {
-                            return; /* PLEASE DON'T REMVOE! */
+                            if(!opt.ds) return md.tablist[index].pressedImg;
+
+                            switch(index)
+                            {
+                            case 0: return R.image("home_pressed_36dp.png");
+                            case 1: return R.image("alarm_pressed_36dp.png");
+                            case 2: return R.image("search_pressed_36dp.png");
+                            case 3: return R.image("favorite_pressed_36dp.png");
+                            case 4: return R.image("account_pressed_36dp.png");
+                            default: return R.image("noitem_pressed_24dp.png");
+                            }
                         }
-                        loader.sourceComponent = componentTab3;
-                    }
-                }
-                CPButton
-                {
-                    sourceWidth: parent.width / 4
-                    sourceHeight: parent.height
-                    btnName: "메뉴4"
-                    rectColor: R.color_buttonColor001
-                    textColor: "white"
-                    onClicked:
-                    {
-                        /* DESIGN LOGIC */
-                        if(opt.ds)
+                        releasedSource:
                         {
-                            return; /* PLEASE DON'T REMVOE! */
+                            if(!opt.ds) return md.tablist[index].releasedImg;
+
+                            switch(index)
+                            {
+                            case 0: return R.image("home_released_36dp.png");
+                            case 1: return R.image("alarm_released_36dp.png");
+                            case 2: return R.image("search_released_36dp.png");
+                            case 3: return R.image("favorite_released_36dp.png");
+                            case 4: return R.image("account_released_36dp.png");
+                            default: return R.image("noitem_released_24dp.png");
+                            }
                         }
-                        loader.sourceComponent = componentTab4;
                     }
                 }
             }
         }
     }
-
 }
 

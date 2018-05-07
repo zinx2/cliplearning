@@ -6,7 +6,7 @@ Rectangle
     width: parent.width
     height: parent.height
     visible: true
-    color: R.color_bgColor002
+    color: R.color_theme01
 
     Column
     {

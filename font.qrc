@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>font/NanumBarunGothic_android.ttf</file>
         <file>font/NanumBarunGothic_ios.ttf</file>
+        <file>font/NanumBarunGothic_mac.ttf</file>
     </qresource>
 </RCC>

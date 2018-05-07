@@ -3,6 +3,7 @@ import "Resources.js" as R
 
 Text {
     wrapMode: Text.Wrap
+    elide: Text.ElideRight
 //    font.pixelSize: R.font_M
     font.family: fontNanumBarunGothic.name
     horizontalAlignment: Text.AlignLeft

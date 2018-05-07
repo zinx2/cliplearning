@@ -20,12 +20,14 @@ function toTime(mSecs)
     return hours + ":" + minutes + ":" + seconds;
 }
 
-var height_titlaBar = dp(144);
+var height_titlaBar = dp(110);
 var height_button_middle = dp(144);
 
-var color_appTitlebar = "#272e36"
+var color_appTitlebar = "white"
 var color_appTitleText = "#ffffff"
 var color_buttonPressed = "#44000000"
+
+var color_theme01 = "#fa7070"
 
 var color_bgColor001 = "#e4e5e9"
 var color_bgColor002 = "#5460e0"

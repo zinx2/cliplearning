@@ -6,8 +6,11 @@ import "Resources.js" as R
 Rectangle {
 
     property bool visibleBackBtn : true
+    property string backImg : R.image("back_white.png")
     property bool visibleSearchBtn : true
+    property string searchImg : R.image("settings_36dp.png")
     property string titleText : opt.ds ? R.string_title : md.title
+    property string titleBgColor : R.color_appTitlebar
     signal evtBack()
     signal evtSearch()
 
@@ -19,8 +22,8 @@ Rectangle {
         id: titleBar
         height: R.height_titlaBar
         width: parent.width
-        color: R.color_appTitlebar
-
+        color: titleBgColor
+        z: 999
         CPButton
         {
             id: btnBack
@@ -28,8 +31,9 @@ Rectangle {
             visible: visibleBackBtn
             width: parent.height
             height: parent.height
-            sourceWidth: R.dp(100)
-            sourceHeight: R.dp(100)
+            sourceWidth: R.dp(80)
+            sourceHeight: R.dp(80)
+            imageSource: backImg
             type: "image"
             onClicked:
             {
@@ -49,7 +53,17 @@ Rectangle {
             font.family: fontNanumBarunGothic.name
             FontLoader {
                 id: fontNanumBarunGothic
-                source: R.os() === "android" ? R.font("NanumBarunGothic_android.ttf") : R.font("NanumBarunGothic_ios.ttf")
+                source:
+                {
+                    switch(Qt.platform.os)
+                    {
+                        case "android": return "../font/NanumBarunGothic_android.ttf"
+                        case "ios": return "../font/NanumBarunGothic_ios.ttf"
+                        case "osx": return "../font/NanumBarunGothic_mac.ttf"
+                        case "window": return "../font/NanumBarunGothic_win.ttf"
+                        default: return "../font/NanumBarunGothic_win.ttf"
+                    }
+                }
             }
         }
 
@@ -64,9 +78,9 @@ Rectangle {
             visible: visibleSearchBtn
             width: parent.height
             height: parent.height
-            sourceWidth: R.dp(100)
-            sourceHeight: R.dp(100)
-            imageSource: R.image("search_white.png")
+            sourceWidth: R.dp(80)
+            sourceHeight: R.dp(80)
+            imageSource: searchImg
             type: "image"
             onClicked:
             {

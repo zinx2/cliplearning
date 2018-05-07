@@ -8,12 +8,16 @@ Rectangle {
     id: rect
     color: "#e41f69"
 
+    width: 1080
+    height: 1920
+    property int dLenth : opt.ds ? 20 : md.dlist.length
+
     Component.onCompleted:
     {
+        console.log("@@QtPlatform : " + Qt.platform.os);
+        if(opt.ds) return;
         wk.getDummyAll();
-        console.log("@@Length : " + md.dlist.length);
-        console.log("@@Size : " + md.dlist.size);
-        console.log("@@Count : " + md.dlist.count);
+        console.log("@@Length : " + dLenth);
     }
 
 //    Timer
@@ -34,8 +38,8 @@ Rectangle {
         id: flick
         anchors.fill: parent
         contentWidth : parent.width
-        contentHeight: R.dp(500) * md.dlist.length
-        maximumFlickVelocity: R.dp(500) * md.dlist.length
+        contentHeight: R.dp(500) * dLenth
+        maximumFlickVelocity: R.dp(500) * dLenth
 
         //        ScrollBar.horizontal: ScrollBar { id: hbar; active: vbar.active }
         //        ScrollBar.vertical: ScrollBar { id: vbar; active: hbar.active }
@@ -43,21 +47,21 @@ Rectangle {
         Column
         {
             width: parent.width
-            height: R.dp(500) * md.dlist.length
+            height: R.dp(500) * dLenth
             Repeater
             {
                 id: rt
-                model: md.dlist.length
+                model: dLenth
                 Rectangle
                 {
                     width: parent.width
                     height: R.dp(500)
-                    color: md.dlist[index].bgColor
+                    color: (opt.ds ? "gray" : md.dlist[index].bgColor)
                     CPImage
                     {
                         width: R.dp(500)
                         height: R.dp(500)
-                        source: "image://async/" + md.dlist[index].imgUrl
+                        source: opt.ds ? "../img/noimage.png" : ("image://async/"+md.dlist[index].imgUrl)
                         anchors
                         {
                             horizontalCenter: parent.horizontalCenter
@@ -90,7 +94,7 @@ Rectangle {
                             from: 0;
                             to: 0.5;
                             duration: 500;
-                            running: md.dlist[index].clicked;
+                            running: (opt.ds ? false : md.dlist[index].clicked)
                             onStopped: {
                                 clearButtons();
                             }
@@ -104,7 +108,7 @@ Rectangle {
                         color: "transparent"
                         CPText
                         {
-                            text: md.dlist[index].title;
+                            text: (opt.ds ? "untitled" : md.dlist[index].title)
                             color: "white"
                         }
                     }
@@ -116,15 +120,15 @@ Rectangle {
                         anchors.fill: parent
                         onClicked:
                         {
+                            if(opt.ds) return;
+
                             clearButtons();
                             md.dlist[index].isClicked(true);
                         }
 
                     }
                 }
-
             }
-
         }
 
         rebound: Transition {
@@ -134,71 +138,6 @@ Rectangle {
                 easing.type: Easing.OutBounce
             }
         }
-    }
-
-
-    //    CPButton
-    //    {
-    //        sourceWidth: parent.width
-    //        sourceHeight: R.dp(100)
-    //        width: parent.width
-    //        height: R.dp(100)
-    //        type: "image"
-    //        btnName: "GET ALL DEMO LIST~"
-    //        rectColor: "orange"
-    //        textColor: "white"
-    //        fontSize: R.pt(15)
-    //        imageSource: R.image("volume_on_48dp.png")
-    //        onClicked: {
-    //            //                nt.title();
-    //            wk.getDemoAll();
-    //        }
-    //    }
-
-
-    //    Row
-    //    {
-    //        Column
-    //        {
-    //            Button
-    //            {
-    //                width: 100
-    //                height: 100
-    //                text: "버튼1"
-    //            }
-
-    //            Button
-    //            {
-    //                width: 100
-    //                height: 100
-    //                text: "버튼3"
-    //            }
-    //        }
-
-    //        Button
-    //        {
-    //            width: 100
-    //            height: 100
-    //            text: "버튼4"
-    //            onClicked: func("QWTQWTQWT")
-    //        }
-    //    }
-
-    //    Button
-    //    {
-    //        anchors.horizontalCenter: parent.horizontalCenter
-    //        anchors.verticalCenter: parent.verticalCenter
-    ////        anchors { verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter  }
-
-    //        width: 100
-    //        height: 100
-    //        text: "버튼2"
-    //    }
-
-    function func(txt)
-    {
-        rect.color = "red"
-        console.log(txt)
     }
 
     function clearButtons()
