@@ -134,6 +134,9 @@ void NetWorker::getDummyAll()
 
     m_hosts.append(new NetHost("get", "/getDummyAll",
                                [&]()-> void {
+
+                                   m->setBusy(true);
+
                                    /********** PROCESS SEQUENTIALLY REQUESTS, SO BE DECLARED MUTEX **********/
                                    QMutexLocker locker(&m_mtx);
 
@@ -170,7 +173,7 @@ void NetWorker::getDummyAll()
                                    }
                                    qDebug() << m->dlist().size();
 
-
+                                   if(m_hosts.length() == 0) m->setBusy(false);
 
                                    /********** CLEAR QNetworkReply INSTANCE **********/
                                    m_netReply->deleteLater();
@@ -184,6 +187,9 @@ void NetWorker::getImageAll()
 
     m_hosts.append(new NetHost("get", "/getImageAll",
                                [&]()-> void {
+
+                                   m->setBusy(true);
+
                                    /********** PROCESS SEQUENTIALLY REQUESTS, SO BE DECLARED MUTEX **********/
                                    QMutexLocker locker(&m_mtx);
 
@@ -206,6 +212,9 @@ void NetWorker::getImageAll()
                                        QObject* o = qobject_cast<QObject*>(d);
                                        m->addImage(o);
                                    }
+
+                                   if(m_hosts.length() == 0) m->setBusy(false);
+
                                    /********** CLEAR QNetworkReply INSTANCE **********/
                                    m_netReply->deleteLater();
                                    emit next();
@@ -218,6 +227,9 @@ void NetWorker::getColorAll()
 
     m_hosts.append(new NetHost("get", "/getColorAll",
                                [&]()-> void {
+
+                                   m->setBusy(true);
+
                                    /********** PROCESS SEQUENTIALLY REQUESTS, SO BE DECLARED MUTEX **********/
                                    QMutexLocker locker(&m_mtx);
 
@@ -240,6 +252,9 @@ void NetWorker::getColorAll()
                                        QObject* o = qobject_cast<QObject*>(d);
                                        m->addColor(o);
                                    }
+
+                                   if(m_hosts.length() == 0) m->setBusy(false);
+
                                    /********** CLEAR QNetworkReply INSTANCE **********/
                                    m_netReply->deleteLater();
                                    emit next();
@@ -252,6 +267,9 @@ void NetWorker::getCategoryAll()
 
     m_hosts.append(new NetHost("get", "/getCategoryAll",
                                [&]()-> void {
+
+                                   m->setBusy(true);
+
                                    /********** PROCESS SEQUENTIALLY REQUESTS, SO BE DECLARED MUTEX **********/
                                    QMutexLocker locker(&m_mtx);
 
@@ -276,6 +294,8 @@ void NetWorker::getCategoryAll()
                                        m->addCategory(o);
                                    }
 
+                                   if(m_hosts.length() == 0) m->setBusy(false);
+
                                    /********** CLEAR QNetworkReply INSTANCE **********/
                                    m_netReply->deleteLater();
                                    emit next();
@@ -288,6 +308,9 @@ void NetWorker::getLikeClipList(int type)
     m->setMessageInt(type);
     m_hosts.append(new NetHost("get", "/getDummyAll",
                                [&]()-> void {
+
+                                   m->setBusy(true);
+
                                    /********** PROCESS SEQUENTIALLY REQUESTS, SO BE DECLARED MUTEX **********/
                                    QMutexLocker locker(&m_mtx);
 
@@ -331,6 +354,8 @@ void NetWorker::getLikeClipList(int type)
                                            m->addLikeClip(o);
                                        }
                                     }
+
+                                   if(m_hosts.length() == 0) m->setBusy(false);
 
                                    /********** CLEAR QNetworkReply INSTANCE **********/
                                    m_netReply->deleteLater();

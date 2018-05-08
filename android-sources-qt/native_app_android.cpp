@@ -81,10 +81,10 @@ bool NativeApp::isInstalledApp(QString nameOrScheme)
     return (bool)jresult;
 }
 
-bool NativeApp::isOnline()
+int NativeApp::isOnline()
 {
     QAndroidJniObject activity = QtAndroid::androidActivity();
-    jboolean jresult = activity.callMethod<jboolean>("isOnline", "()Z");
+    jint jresult = activity.callMethod<jint>("isOnline", "()I");
 
     QAndroidJniEnvironment env;
     if(env->ExceptionCheck())
@@ -94,7 +94,7 @@ bool NativeApp::isOnline()
         qCritical("Something Was Wrong!!!");
         return false;
     }
-    return (bool)jresult;
+    return (int)jresult;
 }
 
 void NativeApp::joinKakao()

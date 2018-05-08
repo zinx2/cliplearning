@@ -33,7 +33,7 @@ public:
     QString getPhoneNumber();
 
     bool isInstalledApp(QString nameOrScheme);
-    bool isOnline();
+    int isOnline();
     bool needUpdate();
 
     void notifyLoginResult(bool isSuccess, const char* result);

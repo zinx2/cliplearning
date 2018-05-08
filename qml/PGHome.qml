@@ -451,6 +451,8 @@ Paper {
                 {
                     mainView.titleText = "<font color='" + R.color_theme01 +"'>Clip</font>" +"<font color='black'> Learning</font>"
                     if(opt.ds) return;
+
+                    md.setBusy(true);
                     md.setHomeScrolled(false);
                 }
             }
@@ -467,6 +469,8 @@ Paper {
                 {
                     mainView.titleText = "<font color='black'>알림</font>"
                     if(opt.ds) return;
+
+                    md.setBusy(true);
                     md.setHomeScrolled(true);
                 }
             }
@@ -483,6 +487,8 @@ Paper {
                 {
                     mainView.titleText = "<font color='black'>검색</font>"
                     if(opt.ds) return;
+
+                    md.setBusy(true);
                     md.setHomeScrolled(true);
                 }
             }
@@ -499,6 +505,8 @@ Paper {
                 {
                     mainView.titleText = "<font color='black'>좋아요</font>"
                     if(opt.ds) return;
+
+                    md.setBusy(true);
                     md.setHomeScrolled(true);
                     md.catelikelist[0].select(true);
 
@@ -529,6 +537,7 @@ Paper {
                         fontSize: R.pt(12)
                         iconWidth: R.dp(96)
                         iconHeight: R.dp(96)
+                        heightTextArea: R.dp(30)
                         releasedColor: "black"
                         pressedColor: R.color_theme01
                         selected:

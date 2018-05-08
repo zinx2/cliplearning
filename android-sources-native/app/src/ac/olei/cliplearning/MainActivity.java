@@ -255,12 +255,22 @@ onResume();
         return isSuccess;
     }
 
-    public boolean isOnline()
+    public int isOnline()
     {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo !=null && networkInfo.isConnected();
+
+        if(networkInfo != null)
+        {
+            if(networkInfo.isConnected())
+            {
+                if(networkInfo.getType() == ConnectivityManager.TYPE_WIFI) return 1;
+                else if(networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) return 2;
+            }
+        }
+
+        return 0;
     }
 
     public boolean needUpdate()

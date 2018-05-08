@@ -312,6 +312,7 @@ class Model : public QObject
     Q_PROPERTY(bool openedDrawer READ openedDrawer WRITE setOpenedDrawer NOTIFY openedDrawerChanged)
     Q_PROPERTY(bool fullScreen READ fullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
     Q_PROPERTY(bool homeScrolled READ homeScrolled WRITE setHomeScrolled NOTIFY homeScrolledChanged)
+    Q_PROPERTY(bool busy READ busy WRITE setBusy NOTIFY busyChanged)
     Q_PROPERTY(QList<QObject*> dlist READ dlist NOTIFY dlistChanged)
     Q_PROPERTY(QList<QObject*> pagerlist READ pagerlist NOTIFY pagerlistChanged)
     Q_PROPERTY(QList<QObject*> tablist READ tablist  NOTIFY tablistChanged)
@@ -341,6 +342,7 @@ public:
     Q_INVOKABLE bool openedDrawer()  const { return m_openedDrawer; }
     Q_INVOKABLE bool fullScreen()  const { return m_fullScreen; }
     Q_INVOKABLE bool homeScrolled()  const { return m_homeScrolled; }
+    Q_INVOKABLE bool busy() const { return m_busy; }
     Q_INVOKABLE QList<QObject*> dlist() const { return m_dlist; }
     Q_INVOKABLE QList<QObject*> pagerlist() const { return m_pagerlist; }
     Q_INVOKABLE QList<QObject*> tablist() const { return m_tablist; }
@@ -383,6 +385,7 @@ public slots:
     void setOpenedDrawer(const bool &m) { m_openedDrawer = m; emit openedDrawerChanged(); }
     void setFullScreen(const bool &m) { m_fullScreen = m; emit fullScreenChanged(); }
     void setHomeScrolled(const bool &m) {m_homeScrolled = m; emit homeScrolledChanged();}
+    void setBusy(const bool & m) { m_busy = m; emit busyChanged(); }
     void addDummy(QObject* m) { m_dlist.append(m); emit dlistChanged();}
     void addPager(QObject* m) { m_pagerlist.append(m); emit pagerlistChanged(); }
     void addImage(QObject* m) { m_imglist.append(m); emit imglistChanged();}
@@ -457,6 +460,7 @@ signals:
     void catelikelistChanged();
     void likecliplistChanged();
     void messageIntChanged();
+    void busyChanged();
 
 private:
     static Model* m_instance;
@@ -480,6 +484,7 @@ private:
     bool m_openedDrawer = false;
     bool m_fullScreen = false;
     bool m_homeScrolled = false;
+    bool m_busy = false;
     QList<QObject*> m_dlist;
     QList<QObject*> m_pagerlist;
     QList<QObject*> m_tablist;

@@ -48,7 +48,7 @@ public slots:
     void onInviteSuccess();
     void onInviteFailed();
 
-    bool isOnline();
+    int isOnline();
     bool isInstalledApp(QString nameOrScheme);
 
     bool needUpdate();

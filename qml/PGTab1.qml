@@ -348,6 +348,7 @@ Rectangle
 
                                 /* NOT DESIGN LOGIC */
                                 wk.getDummyAll();
+                                md.setBusy(true);
                                 wk.request();
                             }
                         }

@@ -99,7 +99,7 @@ Rectangle {
         height: parent.height
         color: "transparent"
         //        opacity: 0.7
-        visible: false
+        visible: opt.ds ? true : md.busy
         z: 9999
 
         Column
@@ -124,7 +124,7 @@ Rectangle {
             id: ma
             width: parent.width
             height: parent.height
-            onClicked: busy(false);
+//            onClicked: busy(false);
         }
     }
 

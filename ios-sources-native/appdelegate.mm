@@ -123,52 +123,6 @@
         app->notifyLoginResult(true, qresult);
     }];
 }
--(BOOL)isNetworkReachable
-{
-    struct sockaddr_in zeroAddr;
-    bzero(&zeroAddr, sizeof(zeroAddr));
-    zeroAddr.sin_len = sizeof(zeroAddr);
-    zeroAddr.sin_family = sizeof(zeroAddr);
-    
-    SCNetworkReachabilityRef defaultRouteReachability =
-    SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddr);
-    SCNetworkReachabilityFlags flags;
-    
-    BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
-    CFRelease(defaultRouteReachability);
-    
-    if(!didRetrieveFlags)
-    {
-        NSLog(@"error");
-    }
-    
-    BOOL isReachable = flags & kSCNetworkFlagsReachable;
-    BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
-    BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
-    
-    if(isReachable && !needsConnection && !nonWiFi)
-    {
-        UIAlertView *alert =[[UIAlertView alloc]
-                             initWithTitle: @"WiFi 네트워크에 연결되었습니다."
-                             message: nil
-                             delegate:self
-                             cancelButtonTitle:nil
-                             otherButtonTitles:@"확인",nil];
-        [alert show];
-        [alert release];
-    }
-    else if(isReachable && !needsConnection && nonWiFi)
-    {
-        UIAlertView *alert =[[UIAlertView alloc]
-                             initWithTitle: @"네트워크 연결이 필요합니다. 사용 가능한 WiFi네트워크나 3G네트워크에 접속해주세요."
-                             message: nil
-                             delegate:self
-                             cancelButtonTitle:nil
-                             otherButtonTitles:@"확인",nil];
-        [alert show];
-        [alert release];
-    }
-}
 @end
 
 @implementation QIOSApplicationDelegate (AppDelegate)
@@ -298,7 +252,7 @@ bool NativeApp::isInstalledApp(QString nameOrScheme)
 {
     return false;
 }
-bool NativeApp::isOnline()
+int NativeApp::isOnline()
 {
     struct sockaddr_in zeroAddr;
     bzero(&zeroAddr, sizeof(zeroAddr));
@@ -322,8 +276,9 @@ bool NativeApp::isOnline()
     BOOL needsConnection = flags & kSCNetworkFlagsConnectionRequired;
     BOOL nonWiFi = flags & kSCNetworkReachabilityFlagsTransientConnection;
     
-    if(isReachable && !needsConnection) return !nonWiFi;
-    return false;
+    if(isReachable && !needsConnection && !nonWiFi) return 1;
+    else if(isReachable && !needsConnection && nonWiFi) return 2;
+    return 0;
 }
 bool NativeApp::needUpdate()
 {

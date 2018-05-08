@@ -179,7 +179,7 @@ void Commander::onInviteFailed()
     qDebug() << "[RESULT] INVITE FAILED.";
 }
 
-bool Commander::isOnline()
+int Commander::isOnline()
 {
     return app->isOnline();
 }

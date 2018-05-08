@@ -124,10 +124,10 @@ bool NativeApp::isInstalledApp(QString nameOrScheme)
     qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";
     return true;
 }
-bool NativeApp::isOnline()
+int NativeApp::isOnline()
 {
     qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";
-    return true;
+    return 0;
 }
 #endif
 
