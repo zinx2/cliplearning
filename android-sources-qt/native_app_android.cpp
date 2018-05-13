@@ -220,3 +220,16 @@ void NativeApp::inviteFacebook(QString senderId, QString image, QString title, Q
     }
 }
 
+void NativeApp::setStatusBarColor(QString colorString)
+{
+  QAndroidJniObject activity = QtAndroid::androidActivity();
+  activity.callMethod<void>("setStatusBarColor", "(Ljava/lang/String;)V",
+                            QAndroidJniObject::fromString(colorString).object<jstring>());
+
+  QAndroidJniEnvironment env;
+  if (env->ExceptionCheck())
+  {
+    env->ExceptionDescribe();
+    env->ExceptionClear();
+  }
+}

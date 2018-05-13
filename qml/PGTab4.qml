@@ -18,25 +18,18 @@ Rectangle
     property int heightListItemLb : R.dp(90)
 
     property int heightCategoryArea: R.dp(120)
-    property int heightScvPadding: R.dp(0)
+    property int heightScvPadding: R.dp(10)
     property int heightListItem : heightListItemImg + heightListItemLb
 
     Rectangle
     {
+        id: scvPadding
         width: parent.width
-        height: R.height_titlaBar-R.dp(2)
-        color: "white"
-        z: 4
+        height: heightScvPadding
+        color: "#f5f6f6"//R.color_theme01
+        z: 3
     }
 
-    Rectangle
-    {
-        width: parent.width
-        height: R.dp(2)
-        color: "black"//R.color_theme01
-        y: R.height_titlaBar - R.dp(2)
-        z: 4
-    }
 
     ScrollView
     {
@@ -44,7 +37,7 @@ Rectangle
         width: parent.width
         height: heightCategoryArea
         horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-        y: R.height_titlaBar
+        y: heightScvPadding
         z: 3
 
         Rectangle
@@ -104,22 +97,13 @@ Rectangle
         }
     }
 
-    Rectangle
-    {
-        id: scvPadding
-        width: parent.width
-        height: heightScvPadding
-        color: "#f5f6f6"//R.color_theme01
-        y: R.height_titlaBar + heightCategoryArea
-        z: 3
-    }
 
     Flickable
     {
         id: flick
         anchors.fill: parent
         contentWidth : parent.width
-        contentHeight: R.height_titlaBar + heightCategoryArea + heightScvPadding + heightListItem * dLength
+        contentHeight: heightCategoryArea + heightScvPadding + heightListItem * dLength
         maximumFlickVelocity: heightListItem * dLength
         clip: true
         boundsBehavior: Flickable.StopAtBounds
@@ -145,19 +129,6 @@ Rectangle
         {
             width: parent.width
             height: flick.height
-
-            Rectangle
-            {
-                width: parent.width
-                height: R.height_titlaBar - R.dp(2)
-                color:"transparent"
-            }
-            Rectangle
-            {
-                width: parent.width
-                height: R.dp(2)
-                color: R.color_theme01
-            }
 
             Rectangle
             {

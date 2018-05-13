@@ -45,8 +45,8 @@ SOURCES += \
     src/settings.cpp
 
 RESOURCES += qml.qrc \
-    img.qrc \
-    font.qrc
+    font.qrc \
+    img.qrc
 
 android {
     QT += androidextras

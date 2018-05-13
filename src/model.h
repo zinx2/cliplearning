@@ -466,11 +466,11 @@ private:
     static Model* m_instance;
     Model()
     {
-        m_tablist.append(new Tab(0, "홈", "../img/home_pressed_36dp.png", "../img/home_released_36dp.png", "black", "white", false));
-        m_tablist.append(new Tab(0, "알림", "../img/alarm_pressed_36dp.png", "../img/alarm_released_36dp.png", "black", "white", false));
-        m_tablist.append(new Tab(0, "검색", "../img/search_pressed_36dp.png", "../img/search_released_36dp.png", "black", "white", false));
-        m_tablist.append(new Tab(0, "좋아요", "../img/favorite_pressed_36dp.png", "../img/favorite_released_36dp.png", "black", "white", false));
-        m_tablist.append(new Tab(0, "로그인", "../img/account_pressed_36dp.png", "../img/account_released_36dp.png", "black", "white", false));
+        m_tablist.append(new Tab(0, "홈", "../img/home_pink.png", "../img/home.png", "black", "white", false));
+        m_tablist.append(new Tab(0, "알림", "../img/alarm_pink.png", "../img/alarm.png", "black", "white", false));
+        m_tablist.append(new Tab(0, "검색", "../img/search_pink.png", "../img/search.png", "black", "white", false));
+        m_tablist.append(new Tab(0, "좋아요", "../img/like_pink.png", "../img/like.png", "black", "white", false));
+        m_tablist.append(new Tab(0, "로그인", "../img/user_pink.png", "../img/user.png", "black", "white", false));
 
         m_catelikelist.append(new Category(1, "클립별"));
         m_catelikelist.append(new Category(2, "댓글별"));

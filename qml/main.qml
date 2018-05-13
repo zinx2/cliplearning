@@ -10,13 +10,20 @@ import "Resources.js" as R
 //        width: 1500
 //        height: 888
 //        visible: true
-//    visibility: md.fullScreen ? Window.FullScreen : Window.AutomaticVisibility
+////    visibility: md.fullScreen ? Window.FullScreen : Window.AutomaticVisibility
+
+////    flags: (Qt.platform.os == "android" || Qt.platform.os == "ios") ? (Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint) : Qt.Window
 
 ////    PGVideoPlayer
 ////    {
 ////        width: parent.width
 ////        height: parent.height
 ////    }
+
+//    Component.onCompleted:
+//    {
+//        cmd.setStatusBarColor("#2a6576");
+//    }
 
 //    Test
 //    {
@@ -30,10 +37,12 @@ ApplicationWindow {
     visible: true
     width: 1500
     height: 888
+    flags: (Qt.platform.os == "android" || Qt.platform.os == "ios") ? (Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint) : Qt.Window
 
     Component.onCompleted: {
 
 
+        cmd.setStatusBarColor(R.color_appTitlebar);
         if(cmd.isOnline())
         {
             fadeoutTimer.running = true;

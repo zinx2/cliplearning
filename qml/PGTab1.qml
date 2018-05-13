@@ -46,10 +46,17 @@ Rectangle
         id: flick
         anchors.fill: parent
         contentWidth : parent.width
-        contentHeight: R.height_titlaBar + heightViewPager + heightCategoryArea + heightScvPadding + (heightListItem * dLength)
+        contentHeight: R.dp(100) + R.height_titlaBar + R.height_statusbar + heightViewPager + heightCategoryArea + heightScvPadding + (heightListItem * dLength)
         maximumFlickVelocity: heightListItem * dLength
         clip: true
-        boundsBehavior: Flickable.StopAtBounds
+        rebound: Transition {
+            NumberAnimation {
+                properties: "x, y"
+                duration: 700
+                easing.type: Easing.OutBounce
+            }
+        }
+        //        boundsBehavior: Flickable.StopAtBounds
 
         onMovementStarted:
         {
@@ -72,41 +79,41 @@ Rectangle
             width: parent.width
             height: flick.height
 
-            Column
-            {
-                id: box
-                width: parent.width
-                height:  R.height_titlaBar
-                Rectangle
-                {
-                    width: parent.width
-                    height: R.height_titlaBar - R.dp(2)
-                    color:"transparent"
-                }
-                Rectangle
-                {
-                    width: parent.width
-                    height: R.dp(2)
-                    color: R.color_theme01
-                }
+            //            Column
+            //            {
+            //                id: box
+            //                width: parent.width
+            //                height:  R.height_titlaBar
+            //                Rectangle
+            //                {
+            //                    width: parent.width
+            //                    height: R.height_titlaBar - R.dp(2)
+            //                    color:"transparent"
+            //                }
+            //                Rectangle
+            //                {
+            //                    width: parent.width
+            //                    height: R.dp(2)
+            //                    color: R.color_theme01
+            //                }
 
-                states: [
-                    State
-                    {
-                        when: md.homeScrolled
-                        PropertyChanges { target: box; height: 0 }
-                    },
-                    State
-                    {
-                        when: !md.homeScrolled
-                        PropertyChanges { target: box; height: R.height_titleBar }
-                    }
-                ]
+            //                states: [
+            //                    State
+            //                    {
+            //                        when: md.homeScrolled
+            //                        PropertyChanges { target: box; height: 0 }
+            //                    },
+            //                    State
+            //                    {
+            //                        when: !md.homeScrolled
+            //                        PropertyChanges { target: box; height: R.height_titleBar }
+            //                    }
+            //                ]
 
-                transitions:  Transition {
-                    NumberAnimation { properties: "y, height"; easing.type: Easing.InOutQuad;}
-                }
-            }
+            //                transitions:  Transition {
+            //                    NumberAnimation { properties: "y, height"; easing.type: Easing.InOutQuad;}
+            //                }
+            //            }
 
             Rectangle
             {
@@ -129,14 +136,11 @@ Rectangle
                     model: opt.ds ? contactModel : md.pagerlist
                     delegate: CPImage {
                         source: opt.ds ? imgPath : ("image://async/"+md.pagerlist[md.pagerlist[index].order-1].imgUrl)
-
-
                         height : viewPager.height;
                         width: viewPager.width
                         fillMode: Image.PreserveAspectCrop
                         clip: true
                     }
-
 
                     path: Path {
                         startX: viewPager.width * (pagerCount > 1 ? -0.5 : 0.5)
@@ -357,6 +361,7 @@ Rectangle
 
                 Column
                 {
+                    id: colRect
                     width: parent.width
                     height: heightListItem * dLength
                     Repeater
@@ -368,17 +373,42 @@ Rectangle
                             width: parent.width
                             height: heightListItem
                             color: (opt.ds ? "gray" : md.dlist[index].bgColor)
-                            CPImage
+
+                            Rectangle
                             {
-                                id: img
+                                id: imgRect
                                 width: widthListItem
                                 height: heightListItemImg
-                                fillMode: Image.PreserveAspectCrop
-                                source: opt.ds ? "../img/noimage.png" : ("image://async/"+md.dlist[index].imgUrl)
-                                anchors
+                                opacity: 0.0
+
+                                CPImage
                                 {
-                                    horizontalCenter: parent.horizontalCenter
-                                    //                                verticalCenter: parent.verticalCenter
+                                    id: img
+                                    width: widthListItem
+                                    height: heightListItemImg
+                                    fillMode: Image.PreserveAspectCrop
+                                    source : opt.ds ? "../img/noimage.png" : "image://async/"+md.dlist[index].imgUrl
+                                    anchors
+                                    {
+                                        horizontalCenter: parent.horizontalCenter
+                                        //                                verticalCenter: parent.verticalCenter
+                                    }
+                                }
+
+                                OpacityAnimator {
+                                    target: imgRect;
+                                    from: 0;
+                                    to: 1;
+                                    duration: 500
+                                    running:
+                                    {
+                                        if(index < 2) return true;
+                                        else
+                                        {
+                                            if(imgRect.opacity < 0.5 ) return (flick.contentY > R.dp(200) + heightListItem * (index-2))
+                                            return false;
+                                        }
+                                    }
                                 }
                             }
 
@@ -502,7 +532,7 @@ Rectangle
                                         width: R.dp(50)
                                         height: R.dp(50)
                                         fillMode: Image.PreserveAspectFit
-                                        source: opt.ds ? R.image("favorite_released_36dp.png") : (md.dlist[index].myLike ? R.image("favorite_pressed_36dp.png") : R.image("favorite_released_36dp.png"))
+                                        source: opt.ds ? R.image("like.png") : (md.dlist[index].myLike ? R.image("like_pink.png") : R.image("like.png"))
                                         anchors
                                         {
                                             horizontalCenter: parent.horizontalCenter
@@ -520,7 +550,7 @@ Rectangle
                                                 likeTxt.color = R.color_theme01;
                                                 return;
                                             }
-z
+                                            z
                                             md.setLikeDummy(index);
                                         }
                                     }
@@ -538,23 +568,14 @@ z
                                     horizontalAlignment: Text.AlignHCenter
                                     anchors
                                     {
-                                       top: likeIcon.bottom
-                                       topMargin: R.dp(-20)
+                                        top: likeIcon.bottom
+                                        topMargin: R.dp(-20)
                                     }
                                 }
                             }
                         }
                     }
                 }
-
-                //            rebound: Transition {
-                //                NumberAnimation {
-                //                    properties: "x, y"
-                //                    duration: 700
-                //                    easing.type: Easing.OutBounce
-                //                }
-                //            }
-                //            }
             }
         }
     }

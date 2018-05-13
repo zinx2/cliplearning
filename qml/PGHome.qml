@@ -8,7 +8,7 @@ Paper {
     visibleBackBtn: false
     backImg: R.image("menu_36dp.png")
     visibleSearchBtn: true
-    titleText: "<font color='" + R.color_theme01 +"'>Clip</font>" +"<font color='black'> Learning</font>"
+    titleText: "<font color='" + R.color_theme01 +"'>CLIP</font>" +"<font color='black'> LEARNING</font>"
     titleBgColor: "transparent"
 
     property bool initTab1 : false
@@ -31,49 +31,48 @@ Paper {
     width: opt.ds ? R.design_size_width : homeStackView.width
     height: opt.ds ? R.design_size_height : homeStackView.height
 
-    Drawer
-    {
-        id: drawer
-        width: parent.width * 2 / 3
-        height: parent.height
-        dragMargin : opt.ds ? R.dp(50) : (md.blockedDrawer ? R.dp(0) : R.dp(50))
-        position: opt.ds ? 0.0 : (md.openedDrawer ? 1.0 : 0.0)
-        interactive: opt.ds ? true :settings.logined
+    //    Drawer
+    //    {
+    //        id: drawer
+    //        width: parent.width * 2 / 3
+    //        height: parent.height
+    //        dragMargin : opt.ds ? R.dp(50) : (md.blockedDrawer ? R.dp(0) : R.dp(50))
+    //        position: opt.ds ? 0.0 : (md.openedDrawer ? 1.0 : 0.0)
+    //        interactive: opt.ds ? true :settings.logined
 
-        PGDrawer
-        {
-            onEvtMyClassRoom:
-            {
-                homeStackView.push(Qt.createComponent(R.view_file_myClassRoom), { });
-            }
+    //        PGDrawer
+    //        {
+    //            onEvtMyClassRoom:
+    //            {
+    //                homeStackView.push(Qt.createComponent(R.view_file_myClassRoom), { });
+    //            }
 
-            onEvtBoardNotice:
-            {
-                homeStackView.push(Qt.createComponent(R.view_file_boardNotice), { });
-            }
+    //            onEvtBoardNotice:
+    //            {
+    //                homeStackView.push(Qt.createComponent(R.view_file_boardNotice), { });
+    //            }
 
-            onEvtBoardQnA:
-            {
-                homeStackView.push(Qt.createComponent(R.view_file_boardQnA), { });
-            }
+    //            onEvtBoardQnA:
+    //            {
+    //                homeStackView.push(Qt.createComponent(R.view_file_boardQnA), { });
+    //            }
 
-            onEvtBoardData:
-            {
-                homeStackView.push(Qt.createComponent(R.view_file_boardData), { });
-            }
+    //            onEvtBoardData:
+    //            {
+    //                homeStackView.push(Qt.createComponent(R.view_file_boardData), { });
+    //            }
 
-            onEvtBoardOption:
-            {
-                homeStackView.push(Qt.createComponent(R.view_file_option), { });
-            }
-        }
-    }
+    //            onEvtBoardOption:
+    //            {
+    //                homeStackView.push(Qt.createComponent(R.view_file_option), { });
+    //            }
+    //        }
+    //    }
 
     Column
     {
         width: parent.width
         height: parent.height
-        z: 1
         //        ListModel {
         //            id: contactModel
         //            ListElement {
@@ -438,6 +437,7 @@ Paper {
             id: loader
             width: parent.width
             height: parent.height - tabHeight
+
         }
 
         Component
@@ -446,13 +446,14 @@ Paper {
             PGTab1
             {
                 width: parent.width
-                height: parent.height
+                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
-                    mainView.titleText = "<font color='" + R.color_theme01 +"'>Clip</font>" +"<font color='black'> Learning</font>"
+                    mainView.titleText = "<font color='" + R.color_theme01 +"'>CLIP</font>" +"<font color='black'> LEARNING</font>"
+                    mainView.titleLineColor = R.color_theme01
                     if(opt.ds) return;
 
-                    md.setBusy(true);
                     md.setHomeScrolled(false);
                 }
             }
@@ -464,13 +465,14 @@ Paper {
             PGTab2
             {
                 width: parent.width
-                height: parent.height
+                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
                     mainView.titleText = "<font color='black'>알림</font>"
+                    mainView.titleLineColor = "black"
                     if(opt.ds) return;
 
-                    md.setBusy(true);
                     md.setHomeScrolled(true);
                 }
             }
@@ -482,13 +484,14 @@ Paper {
             PGTab3
             {
                 width: parent.width
-                height: parent.height
+                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
                     mainView.titleText = "<font color='black'>검색</font>"
+                    mainView.titleLineColor = "black"
                     if(opt.ds) return;
 
-                    md.setBusy(true);
                     md.setHomeScrolled(true);
                 }
             }
@@ -500,13 +503,14 @@ Paper {
             PGTab4
             {
                 width: parent.width
-                height: parent.height
+                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
                     mainView.titleText = "<font color='black'>좋아요</font>"
+                    mainView.titleLineColor = "black"
                     if(opt.ds) return;
 
-                    md.setBusy(true);
                     md.setHomeScrolled(true);
                     md.catelikelist[0].select(true);
 
@@ -521,76 +525,91 @@ Paper {
             width: parent.width
             height: tabHeight
 
-            Row
+            Column
             {
                 width: parent.width
                 height: parent.height
 
-                Repeater
+                Rectangle
                 {
-                    model: tLength
-                    CPButtonToggleTab
+                    id: line
+                    width: parent.width
+                    height: Qt.platform.os === "ios" ? 1 : R.dp(4)
+                    color:R.color_gray001
+                }
+
+                Row
+                {
+                    width: parent.width
+                    height: tabHeight - line.height
+
+                    Repeater
                     {
-                        width: parent.width / tLength
-                        height: tabHeight
-                        title: opt.ds ? "untitled" : (md.tablist[index].title)
-                        fontSize: R.pt(12)
-                        iconWidth: R.dp(96)
-                        iconHeight: R.dp(96)
-                        heightTextArea: R.dp(30)
-                        releasedColor: "black"
-                        pressedColor: R.color_theme01
-                        selected:
+                        model: tLength
+                        CPButtonToggleTab
                         {
-                            if(opt.ds) return false;
-                            return md.tablist[index].selected;
-                        }
-                        onEvtSelect:
-                        {
-                            if(opt.ds) return;
-
-                            switch(index)
+                            width: parent.width / tLength
+                            height: tabHeight - line.height
+                            title: opt.ds ? "untitled" : (md.tablist[index].title)
+                            fontSize: R.pt(10)
+                            iconWidth: R.dp(85)
+                            iconHeight: R.dp(85)
+                            heightTextArea: R.dp(30)
+                            releasedColor: "black"
+                            pressedColor: R.color_theme01
+                            spacingValue: R.dp(12)
+                            selected:
                             {
-                            case 0: loader.sourceComponent = componentTab1; break;
-                            case 1: loader.sourceComponent = componentTab2; break;
-                            case 2: loader.sourceComponent = componentTab3; break;
-                            case 3: loader.sourceComponent = componentTab4; break;
-                            case 4: loader.sourceComponent = componentTab4; break;
+                                if(opt.ds) return false;
+                                return md.tablist[index].selected;
+                            }
+                            onEvtSelect:
+                            {
+                                if(opt.ds) return;
+
+                                switch(index)
+                                {
+                                case 0: loader.sourceComponent = componentTab1; break;
+                                case 1: loader.sourceComponent = componentTab2; break;
+                                case 2: loader.sourceComponent = componentTab3; break;
+                                case 3: loader.sourceComponent = componentTab4; break;
+                                case 4: loader.sourceComponent = componentTab4; break;
+                                }
+
+                                for(var i=0; i<md.tablist.length; i++)
+                                {
+                                    md.tablist[i].select(false);
+                                }
+                                md.tablist[index].select(true);
                             }
 
-                            for(var i=0; i<md.tablist.length; i++)
+                            pressedSource:
                             {
-                                md.tablist[i].select(false);
+                                if(!opt.ds) return md.tablist[index].pressedImg;
+
+                                switch(index)
+                                {
+                                case 0: return R.image("home_pink.png");
+                                case 1: return R.image("alarm_pink.png");
+                                case 2: return R.image("search_pink.png");
+                                case 3: return R.image("like_pink.png");
+                                case 4: return R.image("user_pink.png");
+                                default: return R.image("noitem_pressed_24dp.png");
+                                }
                             }
-                            md.tablist[index].select(true);
-                        }
-
-                        pressedSource:
-                        {
-                            if(!opt.ds) return md.tablist[index].pressedImg;
-
-                            switch(index)
+                            releasedSource:
                             {
-                            case 0: return R.image("home_pressed_36dp.png");
-                            case 1: return R.image("alarm_pressed_36dp.png");
-                            case 2: return R.image("search_pressed_36dp.png");
-                            case 3: return R.image("favorite_pressed_36dp.png");
-                            case 4: return R.image("account_pressed_36dp.png");
-                            default: return R.image("noitem_pressed_24dp.png");
-                            }
-                        }
-                        releasedSource:
-                        {
-                            if(!opt.ds) return md.tablist[index].releasedImg;
+                                if(!opt.ds) return md.tablist[index].releasedImg;
 
-                            switch(index)
-                            {
-                            case 0: return R.image("home_released_36dp.png");
-                            case 1: return R.image("alarm_released_36dp.png");
-                            case 2: return R.image("search_released_36dp.png");
-                            case 3: return R.image("favorite_released_36dp.png");
-                            case 4: return R.image("account_released_36dp.png");
-                            default: return R.image("noitem_released_24dp.png");
+                                switch(index)
+                                {
+                                case 0: return R.image("home.png");
+                                case 1: return R.image("alarm.png");
+                                case 2: return R.image("search.png");
+                                case 3: return R.image("like.png");
+                                case 4: return R.image("user.png");
+                                default: return R.image("noitem_released_24dp.png");
+                                }
                             }
                         }
                     }

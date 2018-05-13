@@ -11,84 +11,107 @@ Rectangle {
     property string searchImg : R.image("settings_36dp.png")
     property string titleText : opt.ds ? R.string_title : md.title
     property string titleBgColor : R.color_appTitlebar
+    property string titleLineColor : R.color_theme01
+    property int lineHeight : Qt.platform.os === "ios" ? 1 : R.dp(2)
     signal evtBack()
     signal evtSearch()
 
     width: opt.ds ? R.design_size_width : parent.width
     height: opt.ds ? R.design_size_height : parent.height
 
-    Rectangle
+    Column
     {
-        id: titleBar
-        height: R.height_titlaBar
         width: parent.width
-        color: titleBgColor
-        z: 999
-        CPButton
+        height: R.height_statusbar + R.height_titlaBar
+        Rectangle
         {
-            id: btnBack
-            x: 0; y: 0
-            visible: visibleBackBtn
-            width: parent.height
-            height: parent.height
-            sourceWidth: R.dp(80)
-            sourceHeight: R.dp(80)
-            imageSource: backImg
-            type: "image"
-            onClicked:
-            {
-                evtBack()
-            }
+            id: bgStatusBar
+            color: R.color_appTitlebar
+            width: parent.width
+            height: R.height_statusbar
         }
 
-        Label
+        Rectangle
         {
+            id: titleBar
+            height: R.height_titlaBar - lineHeight
             width: parent.width
-            height: parent.height
-            text: titleText
-            color: R.color_appTitleText
-            horizontalAlignment : Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
-            font.pointSize: R.pt(24)
-            font.family: fontNanumBarunGothic.name
-            FontLoader {
-                id: fontNanumBarunGothic
-                source:
+            color: titleBgColor
+
+            CPButton
+            {
+                id: btnBack
+                x: 0; y: 0
+                visible: visibleBackBtn
+                width: parent.height
+                height: parent.height
+                sourceWidth: R.dp(80)
+                sourceHeight: R.dp(80)
+                imageSource: backImg
+                type: "image"
+                onClicked:
                 {
-                    switch(Qt.platform.os)
-                    {
-                        case "android": return "../font/NanumBarunGothic_android.ttf"
-                        case "ios": return "../font/NanumBarunGothic_ios.ttf"
-                        case "osx": return "../font/NanumBarunGothic_mac.ttf"
-                        case "window": return "../font/NanumBarunGothic_win.ttf"
-                        default: return "../font/NanumBarunGothic_win.ttf"
-                    }
+                    evtBack()
+                }
+            }
+
+            Label
+            {
+                width: parent.width
+                height: parent.height
+                text: titleText
+                color: R.color_appTitleText
+                horizontalAlignment : Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                font.pointSize: R.pt(20)
+                font.family: fontNanum.name
+                font.bold: true
+                FontLoader {
+                    id: fontNanum
+                    source: "../font/NanumSquareBold.ttf"
+//                    {
+//                        switch(Qt.platform.os)
+//                        {
+//                        case "android": return "../font/NanumBarunGothic.ttf"
+//                        case "ios": return "../font/NanumBarunGothic.ttf"
+//                        case "osx": return "../font/NanumBarunGothic_mac.ttf"
+//                        case "window": return "../font/NanumBarunGothic_win.ttf"
+//                        default: return "../font/NanumBarunGothic_win.ttf"
+//                        }
+//                    }
+                }
+            }
+
+            CPButton
+            {
+                id: btnSearch
+                anchors
+                {
+                    right: parent.right
+                }
+
+                visible: visibleSearchBtn
+                width: parent.height
+                height: parent.height
+                sourceWidth: R.dp(80)
+                sourceHeight: R.dp(80)
+                imageSource: searchImg
+                type: "image"
+                onClicked:
+                {
+                    if (Qt.inputMethod.visible)
+                        Qt.inputMethod.hide()
+
+                    evtSearch()
                 }
             }
         }
 
-        CPButton
+        Rectangle
         {
-            id: btnSearch
-            anchors
-            {
-                right: parent.right
-            }
-
-            visible: visibleSearchBtn
-            width: parent.height
-            height: parent.height
-            sourceWidth: R.dp(80)
-            sourceHeight: R.dp(80)
-            imageSource: searchImg
-            type: "image"
-            onClicked:
-            {
-                if (Qt.inputMethod.visible)
-                    Qt.inputMethod.hide()
-
-                evtSearch()
-            }
+            width: parent.width
+            height: lineHeight
+            color: titleLineColor
         }
     }
 
@@ -124,7 +147,7 @@ Rectangle {
             id: ma
             width: parent.width
             height: parent.height
-//            onClicked: busy(false);
+            //            onClicked: busy(false);
         }
     }
 

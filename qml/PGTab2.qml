@@ -11,21 +11,6 @@ Rectangle
     property int itemHeight: R.dp(180)
     property int dLength : opt.ds ? 40 : md.dlist.length
 
-    Rectangle
-    {
-        width: parent.width
-        height: R.height_titlaBar-R.dp(2)
-        color: "white"
-    }
-
-    Rectangle
-    {
-        width: parent.width
-        height: R.dp(2)
-        color: "black"//R.color_theme01
-        y: R.height_titlaBar - R.dp(2)
-    }
-
     Flickable
     {
         id: flick
@@ -35,7 +20,6 @@ Rectangle
         contentHeight: itemHeight * dLength
         maximumFlickVelocity: itemHeight * dLength
         clip: true
-        y: R.height_titlaBar
         boundsBehavior: Flickable.StopAtBounds
 
         onMovementStarted:

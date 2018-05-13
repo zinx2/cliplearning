@@ -6,8 +6,8 @@ Rectangle
     signal evtBack()
     signal evtCallback(variant obj)
 
-    //    width: R.design_size_width
-    //    height: R.design_size_height
+        width: R.design_size_width
+        height: R.design_size_height
     color: "#44000000"
 
     MouseArea

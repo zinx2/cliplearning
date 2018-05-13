@@ -197,6 +197,7 @@ void NativeApp::loginFacebook()
     }
     
     UIViewController *qCtrl = [[[UIApplication sharedApplication] keyWindow]rootViewController];
+
     FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
     [login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:qCtrl
         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
@@ -241,8 +242,6 @@ void NativeApp::withdrawFacebook()
              NSLog(@"failed withdraw facebook...");
          }
      }];
-    
-
 }
 void NativeApp::full()
 {
@@ -365,6 +364,11 @@ void NativeApp::inviteFacebook(QString senderId, QString image, QString title, Q
                                     delegate:nil];
 }
 
+void NativeApp::setStatusBarColor(QString colorString)
+{
+    
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -390,6 +394,7 @@ void NativeApp::inviteFacebook(QString senderId, QString image, QString title, Q
     if ([KOSession isKakaoAccountLoginCallback:url]) {
         return [KOSession handleOpenURL:url];
     }
+    return NO;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -399,6 +404,7 @@ void NativeApp::inviteFacebook(QString senderId, QString image, QString title, Q
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [self initializeRemoteNotification];
+
     return YES;
 }
 
@@ -545,6 +551,4 @@ void NativeApp::inviteFacebook(QString senderId, QString image, QString title, Q
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
 }
-
-
 @end

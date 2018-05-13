@@ -3,5 +3,10 @@
         <file>font/NanumBarunGothic_android.ttf</file>
         <file>font/NanumBarunGothic_ios.ttf</file>
         <file>font/NanumBarunGothic_mac.ttf</file>
+        <file>font/NanumSquareBold.ttf</file>
+        <file>font/NanumSquareExtraBold.ttf</file>
+        <file>font/NanumSquareLight.ttf</file>
+        <file>font/NanumSquareRegular.ttf</file>
+        <file>font/NanumBarunGothic.ttf</file>
     </qresource>
 </RCC>

@@ -20,17 +20,18 @@ function toTime(mSecs)
     return hours + ":" + minutes + ":" + seconds;
 }
 
-var height_titlaBar = dp(110);
+var height_statusbar = Qt.platform.os == "ios" ? 20 : 0
+var height_titlaBar = dp(144);
 var height_button_middle = dp(144);
 
-var color_appTitlebar = "white"
+var color_appTitlebar = "#ffffff"
 var color_appTitleText = "#ffffff"
 var color_buttonPressed = "#44000000"
 
 var color_theme01 = "#fa7070"
 
-var color_bgColor001 = "#e4e5e9"
-var color_bgColor002 = "#5460e0"
+var color_bgColor001 = "#fa7070"
+var color_bgColor002 = "#f9acac"
 var color_buttonColor001 = "#5460e0"
 
 var color_orange = "#f6712a"
@@ -41,6 +42,8 @@ var color_kut_blue = "#183072"
 var color_kut_lightBlue = "#22449c"
 var color_kut_lightGray = "#b3b3aa"
 var color_kut_gray = "#4c4c4c"
+
+var color_gray001 = "#f5f6f6"
 
 var MARGIN_XL     =   pt(45)//80
 var MARGIN_L      =  pt(37.5)//72

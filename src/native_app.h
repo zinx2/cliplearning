@@ -29,6 +29,8 @@ public:
 	void withdrawFacebook();
     void inviteFacebook(QString senderId, QString image, QString title, QString desc, QString link);
 
+    void setStatusBarColor(QString colorString);
+
     QString getDeviceId();
     QString getPhoneNumber();
 

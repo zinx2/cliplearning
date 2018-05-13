@@ -2,10 +2,13 @@ import QtQuick 2.0
 import "Resources.js" as R
 
 Text {
+    property int style : 0
+
     wrapMode: Text.Wrap
     elide: Text.ElideRight
 //    font.pixelSize: R.font_M
-    font.family: fontNanumBarunGothic.name
+
+    font.family: fontLoader.name
     horizontalAlignment: Text.AlignLeft
 //    lineHeight: lineCount==1? 1 :
 
@@ -13,7 +16,7 @@ Text {
     //    font.family: fontType==0 ?
 
     FontLoader {
-        id: fontNanumBarunGothic        
-        source: R.os() === "android" ? R.font("NanumBarunGothic_android.ttf") : R.font("NanumBarunGothic_ios.ttf")
+        id: fontLoader
+        source:R.font("NanumSquareLight.ttf");
     }
 }

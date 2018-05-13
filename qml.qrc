@@ -45,5 +45,6 @@
         <file>qml/PGPlayerController.qml</file>
         <file>qml/CPButtonToggleTab.qml</file>
         <file>qml/PGCourseDesk.qml</file>
+        <file>qml/CPTextBold.qml</file>
     </qresource>
 </RCC>

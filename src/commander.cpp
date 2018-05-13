@@ -88,6 +88,11 @@ void Commander::inviteFacebook()
     app->inviteFacebook("", "", "", "", "");
 }
 
+void Commander::setStatusBarColor(QString color)
+{
+    app->setStatusBarColor(color);
+}
+
 void Commander::onLoginSuccess(const char* result)
 {
     qDebug() << "[RESULT] LOGIN SUCCESS.";

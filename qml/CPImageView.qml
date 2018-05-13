@@ -3,7 +3,7 @@ import "Resources.js" as R
 Rectangle {
 
     property string imageSource: R.image("principe_1.png");
-    Image
+    CPImage
     {
         source: imageSource
         anchors

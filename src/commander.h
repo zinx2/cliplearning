@@ -33,6 +33,8 @@ public slots:
 	void withdrawFacebook();
     void inviteFacebook();
 
+    void setStatusBarColor(QString color);
+
     void onLoginSuccess(const char* result);
     void onLoginFailed(const char* result);
 
