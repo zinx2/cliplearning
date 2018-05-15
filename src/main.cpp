@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 //    wk->getDummyAll();
     Commander *cmd = Commander::getInstance();
     Settings *settings = Settings::getInstance();
+    AlarmPopup alarmPopup;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("di", &dpInfo);
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
 	engine.rootContext()->setContextProperty("opt", &opt);
     engine.rootContext()->setContextProperty("cmd", cmd);
     engine.rootContext()->setContextProperty("settings", settings);
+    engine.rootContext()->setContextProperty("ap", &alarmPopup);
 	engine.addImageProvider("async", new AsyncImageProvider);
 
     engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));

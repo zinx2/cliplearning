@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import "Resources.js" as R
@@ -115,6 +115,33 @@ Rectangle {
         }
     }
 
+    CPAlarmPopup
+    {
+        id: alarmPopup
+        width: parent.width
+        height: parent.height
+        z: 9998
+
+    }
+
+    OpacityAnimator {
+        id:fadeinAnimator
+        target: alarmPopup;
+        from: 0;
+        to: 1;
+        duration: 500
+        running: opt.ds ? false : md.popup.visible
+    }
+
+    OpacityAnimator {
+        id:fadeoutAnimator
+        target: alarmPopup;
+        from: 1;
+        to: 0;
+        duration: 500
+        running: opt.ds ? false : md.popup.visible
+    }
+
     Rectangle
     {
         id: busyArea
@@ -122,7 +149,7 @@ Rectangle {
         height: parent.height
         color: "transparent"
         //        opacity: 0.7
-        visible: opt.ds ? true : md.busy
+        visible: opt.ds ? false : md.busy
         z: 9999
 
         Column
@@ -133,7 +160,7 @@ Rectangle {
                 left: parent.left
                 leftMargin: parent.width*0.5 - busyIndi.width + R.dp(20)
             }
-            CPBusyIndicatorEKr
+            CPBusyIndicator
             {
                 id: busyIndi
             }
@@ -155,46 +182,6 @@ Rectangle {
     {
         busyArea.visible = isBusy;
         busyIndi.running = isBusy;
-    }
-
-    property bool doQuit: false
-    Timer
-    {
-        id: doQuitControl
-        interval:1500
-        repeat: false
-        onTriggered: {
-            doQuit = false
-        }
-    }
-
-    Keys.onBackPressed:
-    {
-        if (Qt.inputMethod.visible)
-        {
-            Qt.inputMethod.hide()
-            return;
-        }
-
-        if(popupStack.depth > 0)
-        {
-            popupStack.clear();
-            return;
-        }
-
-        if(homeStackView.depth > 1)
-            homeStackView.pop();
-        else
-        {
-            if(!doQuit)
-            {
-                toast("한번 더 누르면 앱을 종료합니다.");
-                doQuit = true;
-                doQuitControl.start();
-            }
-            else
-                Qt.quit();
-        }
     }
 
     CPToast

@@ -46,5 +46,6 @@
         <file>qml/CPButtonToggleTab.qml</file>
         <file>qml/PGCourseDesk.qml</file>
         <file>qml/CPTextBold.qml</file>
+        <file>qml/CPAlarmPopup.qml</file>
     </qresource>
 </RCC>

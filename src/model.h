@@ -301,6 +301,32 @@ private:
     bool m_selected = false;
 };
 
+class AlarmPopup : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(bool yes READ yes WRITE setYes NOTIFY yesChanged)
+    Q_PROPERTY(bool no READ no WRITE setNo NOTIFY noChanged)
+    Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
+
+public slots:
+    void setYes(bool m) { m_yes = m; emit yesChanged(); }
+    void setNo(bool m) { m_no = m; emit noChanged(); }
+    void setVisible(bool m) { m_visible = m; emit visibleChanged(); }
+    bool yes() { return m_yes; }
+    bool no() { return m_no; }
+    bool visible() { return m_visible; }
+
+signals:
+    void yesChanged();
+    void noChanged();
+    void visibleChanged();
+
+private:
+    bool m_yes = false;
+    bool m_no = false;
+    bool m_visible = false;
+};
+
 class Model : public QObject
 {
     Q_OBJECT
@@ -410,7 +436,7 @@ public slots:
         if(like) d->setViewCount(d->viewCount() + 1);
         else d->setViewCount(d->viewCount() - 1);
     }
-    void setMessageInt(int m) { m_messageInt = m; emit messageIntChanged();}
+    void setMessageInt(int m) { m_messageInt = m; emit messageIntChanged(); }
 
     QString getImgUrl(int id)
     {
@@ -474,6 +500,12 @@ private:
 
         m_catelikelist.append(new Category(1, "클립별"));
         m_catelikelist.append(new Category(2, "댓글별"));
+
+//        m_popup.set
+//        m_popup = new Popup();
+//        m_popup->setYes(true);
+//        m_popup->setNo(false);
+//        m_popup->setVisible(false);
     }
 
     QList<QObject*> m_list;
@@ -494,4 +526,5 @@ private:
     QList<QObject*> m_imglist;
     QList<QObject*> m_likecliplist;
     int m_messageInt = -1;
+
 };

@@ -1,0 +1,159 @@
+import QtQuick 2.0
+import QtQuick.Controls 1.4
+import "Resources.js" as R
+Rectangle
+{
+    id: rect
+    signal evtYes()
+    signal evtNo()
+
+    property string msg : "인증번호가 전송되었습니다."
+    property int buttonCount : 2
+    width: R.design_size_width
+    height: R.design_size_height
+    color: "#44000000"
+    visible: opt.ds ? false : md.popup.visible
+
+
+    MouseArea
+    {
+        anchors.fill: parent
+        onClicked:
+        {
+            rect.visible = false
+        }
+    }
+
+    Rectangle
+    {
+        id: popup
+        width: rect.width - R.dp(280)
+        height: R.dp(500)
+        color: "transparent"
+
+        anchors
+        {
+            verticalCenter: parent.verticalCenter
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        Column
+        {
+            width: parent.width
+            height: parent.height
+
+            Rectangle
+            {
+                id: msgRect
+                height: R.dp(360)
+                width: parent.width
+                border.width: R.dp(2)
+                border.color: "#f5f6f6"
+                color: "white"
+
+                CPText
+                {
+                    width: parent.width
+                    height: R.dp(80)
+                    anchors
+                    {
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
+                    }
+
+                    text: msg
+                    color: "black"
+                    horizontalAlignment : Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pointSize: R.pt(18)
+                }
+            }
+
+            Rectangle
+            {
+                id: btnRect
+                width: parent.width
+                height: R.dp(140)
+
+                Row
+                {
+                    width: parent.width
+                    height: R.dp(140)
+
+                    Rectangle
+                    {
+                        id: btnNo
+                        width: buttonCount > 1 ? parent.width * 0.5 : 0
+                        height: parent.height
+                        color: R.color_bgColor002
+
+                        CPText
+                        {
+                            width: parent.width
+                            height: parent.height
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            color: "white"
+                            font.pointSize: R.pt(16)
+                            text: "아니오"
+                        }
+
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                console.log("Closed Popup at NO.");
+
+                                if(opt.ds)
+                                {
+                                    rect.visible = false;
+                                    return;
+                                }
+
+                                md.popup.setVisible(false);
+                                evtNo();
+                            }
+                        }
+                    }
+
+                    Rectangle
+                    {
+                        id: btnYes
+                        width: buttonCount > 1 ? parent.width * 0.5 : parent.width
+                        height: parent.height
+                        color: R.color_bgColor001
+
+                        CPText
+                        {
+                            width: parent.width
+                            height: parent.height
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            color: "white"
+                            font.pointSize: R.pt(16)
+                            text: buttonCount > 1 ? "예" : "확인"
+                        }
+
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                console.log("Closed Popup at YES.");
+                                if(opt.ds)
+                                {
+                                    rect.visible = false;
+                                    return;
+                                }
+
+                                md.popup.setVisible(false);
+                                evtYes();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

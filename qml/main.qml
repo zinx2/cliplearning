@@ -63,7 +63,7 @@ ApplicationWindow {
         id: userStackView
         anchors.fill: parent
         visible: !settings.logined
-//        visible: false
+        //        visible: false
 
         initialItem: PGLoginDesk
         {
@@ -73,7 +73,7 @@ ApplicationWindow {
             Component.onCompleted: {
                 /* When Logined... AutoLogin. */
                 console.log("Component.onCompleted : " + settings.logined);
-                        console.log("Device ID: " + cmd.getDeviceId());
+                console.log("Device ID: " + cmd.getDeviceId());
                 if(settings.logined) {
                     homeStackView.clear();
                     homeStackView.push(Qt.createComponent(R.view_file_home), { });
@@ -86,20 +86,24 @@ ApplicationWindow {
     {
         id: homeStackView
         anchors.fill: parent
-        visible: settings.logined
-        onVisibleChanged: {
-            console.log("onVisibleChanged : " + settings.logined);
-            if(settings.logined) {
-                homeStackView.clear();
-                homeStackView.push(Qt.createComponent(R.view_file_home), { });
-            }
+        initialItem: PGHome
+        {
+
         }
+
+        //        onVisibleChanged: {
+        //            console.log("onVisibleChanged : " + settings.logined);
+        //            if(settings.logined) {
+        //                homeStackView.clear();
+        //                homeStackView.push(Qt.createComponent(R.view_file_home), { });
+        //            }
+        //        }
     }
 
     StackView
     {
         id: popupStack
-        z: 9998
+        z: 9997
     }
 
     PGSplash
@@ -127,6 +131,51 @@ ApplicationWindow {
         }
     }
 
+
+
+    property bool doQuit: false
+    Timer
+    {
+        id: doQuitControl
+        interval:1500
+        repeat: false
+        onTriggered: {
+            doQuit = false
+        }
+    }
+
+    Item {
+        focus: true
+        Keys.onBackPressed:
+        {
+            if(popupStack.depth > 0)
+            {
+                popupStack.clear();
+                return;
+            }
+
+            if(userStackView.depth > 0)
+            {
+                userStackView.pop();
+                return;
+            }
+
+            console.log("stackView.depth >> " + homeStackView.depth)
+            if(homeStackView.depth > 1)
+                homeStackView.pop();
+            else
+            {
+                if(!doQuit)
+                {
+                    toast("한번 더 누르면 앱을 종료합니다.");
+                    doQuit = true;
+                    doQuitControl.start();
+                }
+                else
+                    Qt.quit();
+            }
+        }
+    }
 
     CPToast
     {
