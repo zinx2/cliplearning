@@ -28,6 +28,11 @@ Paper {
         }
     }
 
+    onEvtSearch:
+    {
+        homeStackView.push(Qt.createComponent(R.view_file_option), { });
+    }
+
     width: opt.ds ? R.design_size_width : homeStackView.width
     height: opt.ds ? R.design_size_height : homeStackView.height
 
@@ -620,10 +625,10 @@ Paper {
                                 case 4:
                                 {
                                     if(!settings.logined)
-                                        loader.sourceComponent = componentTab6;
+                                        userStackView.push(Qt.createComponent(R.view_file_loginDesk), { })
                                     else
-                                        loader.sourceComponent = componentTab5;
-                                    break;
+                                        userStackView.push(Qt.createComponent(R.view_file_option), { })
+                                    return;
                                 }
                                 }
 
@@ -644,7 +649,7 @@ Paper {
                                 case 1: return R.image("alarm_pink.png");
                                 case 2: return R.image("search_pink.png");
                                 case 3: return R.image("like_pink.png");
-                                case 4: return R.image("user_pink.png");
+//                                case 4: return R.image("user_pink.png");
                                 default: return R.image("noitem_pressed_24dp.png");
                                 }
                             }
@@ -658,7 +663,7 @@ Paper {
                                 case 1: return R.image("alarm.png");
                                 case 2: return R.image("search.png");
                                 case 3: return R.image("like.png");
-                                case 4: return R.image("user.png");
+//                                case 4: return R.image("user.png");
                                 default: return R.image("noitem_released_24dp.png");
                                 }
                             }

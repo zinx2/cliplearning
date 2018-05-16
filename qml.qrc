@@ -46,6 +46,6 @@
         <file>qml/CPTextBold.qml</file>
         <file>qml/CPAlarmPopup.qml</file>
         <file>qml/PGMyPage.qml</file>
-        <file>qml/NU_PGDrawer.qml</file>
+        <file>qml/PGDrawer.qml</file>
     </qresource>
 </RCC>

@@ -16,10 +16,10 @@ Rectangle
 
     property int widthListItem : R.dp(1080)
     property int widthCategoryArea: R.dp(200)
-    property int heightListItemImg : R.dp(500)
-    property int heightListItemLb : R.dp(90)
+    property int heightListItemImg : R.dp(400)
+    property int heightListItemLb : R.dp(80)
 
-    property int heightViewPager : R.dp(500)
+    property int heightViewPager : R.dp(435)
     property int heightScvPadding: R.dp(10)
     property int heightCategoryArea: R.dp(100)
     property int heightListItem : heightListItemImg + heightListItemLb

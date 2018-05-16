@@ -7,11 +7,11 @@ Paper {
     id: mainView
     visibleSearchBtn: false
     titleText: "설정"
+    titleLineColor: "black"
+    titleTextColor: "black"
 
     onEvtBack:
     {
         homeStackView.pop();
-        if(homeStackView.depth === 1)
-            md.setBlockedDrawer(false);
     }
 }

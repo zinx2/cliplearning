@@ -11,6 +11,7 @@ Rectangle {
     property string searchImg : R.image("setting.png")
     property string titleText : opt.ds ? R.string_title : md.title
     property string titleBgColor : R.color_appTitlebar
+    property string titleTextColor : R.color_appTitleText
     property string titleLineColor : R.color_theme01
     property int lineHeight : Qt.platform.os === "ios" ? 1 : R.dp(2)
     property int titleType : 0 /* 0: text, 1: image */
@@ -67,7 +68,7 @@ Rectangle {
                     width: parent.width
                     height: parent.height
                     text: titleText
-                    color: R.color_appTitleText
+                    color: R.titleTextColor
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.pointSize: R.pt(20)

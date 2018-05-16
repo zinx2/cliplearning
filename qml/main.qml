@@ -60,10 +60,121 @@ ApplicationWindow {
 
     StackView
     {
-        id: userStackView
+        id: homeStackView
         anchors.fill: parent
-//        visible: !settings.logined
-        //        visible: false
+        initialItem: PGHome
+        {
+
+        }
+        pushEnter: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
+            }
+        }
+        pushExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
+        popEnter: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 0
+                to:1
+                duration: 200
+            }
+        }
+        popExit: Transition {
+            PropertyAnimation {
+                property: "opacity"
+                from: 1
+                to:0
+                duration: 200
+            }
+        }
+
+        //        onVisibleChanged: {
+        //            console.log("onVisibleChanged : " + settings.logined);
+        //            if(settings.logined) {
+        //                homeStackView.clear();
+        //                homeStackView.push(Qt.createComponent(R.view_file_home), { });
+        //            }
+        //        }
+    }
+
+    Timer
+    {
+        id: ctrlUserStack_hide
+        running: userStackView.depth == 1
+        repeat: false
+        interval: 500
+        onTriggered:
+        {
+            userStackView.visible = false;
+        }
+    }
+
+    Timer
+    {
+        id: ctrlUserStack_show
+        running: userStackView.depth > 1
+        repeat: false
+        interval: 0
+        onTriggered:
+        {
+            userStackView.visible = true
+        }
+    }
+
+    StackView
+    {
+        id: userStackView
+        width: parent.width
+        height: parent.height
+        pushEnter: Transition {
+            PropertyAnimation {
+                property: "y"
+                from: homeStackView.height
+                to:0
+                duration: 200
+            }
+        }
+        pushExit: Transition {
+            PropertyAnimation {
+                property: "y"
+                from: 0
+                to:0
+                duration: 200
+            }
+        }
+        popEnter: Transition {
+            PropertyAnimation {
+                property: "y"
+                from: 0
+                to:0
+                duration: 200
+            }
+        }
+        popExit: Transition {
+            PropertyAnimation {
+                property: "y"
+                from: 0
+                to: homeStackView.height
+                duration: 200
+            }
+        }
+        visible: false
+        initialItem: Rectangle
+        {
+            color: "transparent"
+//            enabled: false
+        }
 
 //        initialItem: PGLoginDesk
 //        {
@@ -82,23 +193,6 @@ ApplicationWindow {
 //        }
     }
 
-    StackView
-    {
-        id: homeStackView
-        anchors.fill: parent
-        initialItem: PGHome
-        {
-
-        }
-
-        //        onVisibleChanged: {
-        //            console.log("onVisibleChanged : " + settings.logined);
-        //            if(settings.logined) {
-        //                homeStackView.clear();
-        //                homeStackView.push(Qt.createComponent(R.view_file_home), { });
-        //            }
-        //        }
-    }
 
     StackView
     {
