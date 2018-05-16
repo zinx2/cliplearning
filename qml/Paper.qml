@@ -6,13 +6,14 @@ import "Resources.js" as R
 Rectangle {
 
     property bool visibleBackBtn : true
-    property string backImg : R.image("back_white.png")
+    property string backImg : R.image("back.png")
     property bool visibleSearchBtn : true
-    property string searchImg : R.image("settings_36dp.png")
+    property string searchImg : R.image("setting.png")
     property string titleText : opt.ds ? R.string_title : md.title
     property string titleBgColor : R.color_appTitlebar
     property string titleLineColor : R.color_theme01
     property int lineHeight : Qt.platform.os === "ios" ? 1 : R.dp(2)
+    property int titleType : 0 /* 0: text, 1: image */
     signal evtBack()
     signal evtSearch()
 
@@ -55,30 +56,42 @@ Rectangle {
                 }
             }
 
-            Label
+            Rectangle
             {
                 width: parent.width
                 height: parent.height
-                text: titleText
-                color: R.color_appTitleText
-                horizontalAlignment : Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                font.pointSize: R.pt(20)
-                font.family: fontNanum.name
-                font.bold: true
-                FontLoader {
-                    id: fontNanum
-                    source: "../font/NanumSquareBold.ttf"
-//                    {
-//                        switch(Qt.platform.os)
-//                        {
-//                        case "android": return "../font/NanumBarunGothic.ttf"
-//                        case "ios": return "../font/NanumBarunGothic.ttf"
-//                        case "osx": return "../font/NanumBarunGothic_mac.ttf"
-//                        case "window": return "../font/NanumBarunGothic_win.ttf"
-//                        default: return "../font/NanumBarunGothic_win.ttf"
-//                        }
-//                    }
+                color: "transparent"
+
+                Label
+                {
+                    width: parent.width
+                    height: parent.height
+                    text: titleText
+                    color: R.color_appTitleText
+                    horizontalAlignment : Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pointSize: R.pt(20)
+                    font.family: fontNanum.name
+                    font.bold: true
+                    FontLoader {
+                        id: fontNanum
+                        source: "../font/NanumSquareBold.ttf"
+                    }
+                }
+
+                CPImage
+                {
+                    id: img
+                    width: R.dp(373)
+                    height: R.dp(60)
+                    fillMode: Image.PreserveAspectFit
+                    visible: titleType == 1
+                    source: "../img/title.png"
+                    anchors
+                    {
+                        horizontalCenter: parent.horizontalCenter
+                        verticalCenter: parent.verticalCenter
+                    }
                 }
             }
 
@@ -93,8 +106,8 @@ Rectangle {
                 visible: visibleSearchBtn
                 width: parent.height
                 height: parent.height
-                sourceWidth: R.dp(80)
-                sourceHeight: R.dp(80)
+                sourceWidth: R.dp(60)
+                sourceHeight: R.dp(60)
                 imageSource: searchImg
                 type: "image"
                 onClicked:
@@ -130,7 +143,7 @@ Rectangle {
         from: 0;
         to: 1;
         duration: 500
-        running: opt.ds ? false : md.popup.visible
+        running: opt.ds ? false : ap.visible
     }
 
     OpacityAnimator {
@@ -139,7 +152,7 @@ Rectangle {
         from: 1;
         to: 0;
         duration: 500
-        running: opt.ds ? false : md.popup.visible
+        running: opt.ds ? false : ap.visible
     }
 
     Rectangle

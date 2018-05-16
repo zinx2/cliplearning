@@ -1,4 +1,4 @@
-<RCC>
+﻿<RCC>
     <qresource prefix="/">
         <file>img/back_white.png</file>
         <file>img/close_white.png</file>
@@ -21,20 +21,44 @@
         <file>img/volume_off_48dp.png</file>
         <file>img/volume_on_36dp.png</file>
         <file>img/volume_on_48dp.png</file>
-        <file>img/account_released_36dp.png</file>
-        <file>img/alarm_pressed_36dp.png</file>
-        <file>img/alarm_released_36dp.png</file>
-        <file>img/home_pressed_36dp.png</file>
-        <file>img/home_released_36dp.png</file>
-        <file>img/search_pressed_36dp.png</file>
-        <file>img/search_released_36dp.png</file>
         <file>img/noitem_released_24dp.png</file>
         <file>img/noitem_pressed_24dp.png</file>
         <file>img/noimage.png</file>
-        <file>img/favorite_pressed_36dp.png</file>
-        <file>img/favorite_released_36dp.png</file>
         <file>img/menu_36dp.png</file>
-        <file>img/settings_36dp.png</file>
-        <file>img/account_pressed_36dp.png</file>
+        <file>img/alarm.png</file>
+        <file>img/alarm_pink.png</file>
+        <file>img/home.png</file>
+        <file>img/home_pink.png</file>
+        <file>img/like.png</file>
+        <file>img/like_pink.png</file>
+        <file>img/search.png</file>
+        <file>img/search_pink.png</file>
+        <file>img/user_pink.png</file>
+        <file>img/.DS_Store</file>
+        <file>img/back.png</file>
+        <file>img/sns_facebook.png</file>
+        <file>img/sns_kakao.png</file>
+        <file>img/setting_account.png</file>
+        <file>img/setting_alarm.png</file>
+        <file>img/setting_info.png</file>
+        <file>img/setting_notice.png</file>
+        <file>img/setting_que.png</file>
+        <file>img/setting_user.png</file>
+        <file>img/mypage_comment.png</file>
+        <file>img/mypage_comment_pink.png</file>
+        <file>img/mypage_like.png</file>
+        <file>img/mypage_like_pink.png</file>
+        <file>img/button_go.png</file>
+        <file>img/class_quiz.png</file>
+        <file>img/class_quiz_black.png</file>
+        <file>img/class_share.png</file>
+        <file>img/comment_go.png</file>
+        <file>img/comment_setting.png</file>
+        <file>img/down.png</file>
+        <file>img/gray_go.png</file>
+        <file>img/title.png</file>
+        <file>img/setting.png</file>
+        <file>img/user.png</file>
+        <file>img/user_edit.png</file>
     </qresource>
 </RCC>

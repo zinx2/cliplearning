@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
+import QtQuick.Controls 1.4
 import "Resources.js" as R
 
 Rectangle {
@@ -8,8 +9,8 @@ Rectangle {
     id: rect
     color: "white"
 
-    width: parent.width
-    height: parent.height
+    width: opt.ds ? 1080 : parent.width
+    height: opt.ds ? 1920 : parent.height
     property int dLenth : opt.ds ? 20 : md.dlist.length
 
     Component.onCompleted:
@@ -20,18 +21,37 @@ Rectangle {
         console.log("@@Length : " + dLenth);
     }
 
-
-    Column
+    Rectangle
     {
-        width: parent.width
-        height: parent.height
+        width: 200
+        height: 100
+        color: "white"
+        radius: 100
+        border.width: 2
+        border.color: "blue"
+    }
 
-        Rectangle
-        {
-            color: "yellow"
-            height: R.dp(61)
-            width: R.dp(540)
-        }
+//    Rectangle
+//    {
+//        width: parent.height
+//        height: parent.height
+//        color: R.color_bgColor003
+//        rotation:48
+//        x: -parent.height * 0.54
+//        y: parent.height * 0.47
+//    }
+
+//    Column
+//    {
+//        width: parent.width
+//        height: parent.height
+
+//        Rectangle
+//        {
+//            color: "yellow"
+//            height: R.dp(61)
+//            width: R.dp(540)
+//        }
 
 //        CPText {
 //            font.pointSize: R.pt(20)
@@ -54,7 +74,7 @@ Rectangle {
 //            text: "아버지가방에들어가신다.헌신짝을신고"
 //        }
 
-    }
+//    }
 
 
 

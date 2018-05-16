@@ -6,7 +6,17 @@ Rectangle
     width: parent.width
     height: parent.height
     visible: true
-    color: R.color_theme01
+    color: "white"
+
+    Rectangle
+    {
+        width: parent.height
+        height: parent.height
+        color: R.color_bgColor003
+        rotation:48
+        x: -parent.height * 0.54
+        y: parent.height * 0.47
+    }
 
     Column
     {
@@ -17,23 +27,16 @@ Rectangle
             horizontalCenter: parent.horizontalCenter
             verticalCenter: parent.verticalCenter
         }
-        Rectangle
-        {
-            width: ekoreaText.contentWidth
-            height: ekoreaText.contentHeight
-            color: "transparent"
 
-            CPText
-            {
-                id: ekoreaText
-                font.pointSize: R.pt(50)
-                font.bold: true
-                color: "white"
-                text: "e-koreatech"
-                horizontalAlignment: Text.AlignHCenter
-            }
+        CPText
+        {
+            id: ekoreaText
+            font.pointSize: R.pt(50)
+            font.bold: true
+            color: "black"
+            text: "e-koreatech"
+            horizontalAlignment: Text.AlignHCenter
         }
-        LYMargin { height: R.dp(60) }
     }
 
     CPBusyIndicatorEKr

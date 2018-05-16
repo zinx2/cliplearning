@@ -85,7 +85,7 @@ QString NativeApp::getPhoneNumber()
 }
 void NativeApp::joinKakao()
 {
-    qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";Ï
+    qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";
 }
 void NativeApp::loginKakao()
 {
@@ -129,5 +129,14 @@ int NativeApp::isOnline()
     qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";
     return 0;
 }
+void NativeApp::setStatusBarColor(QString colorString)
+{
+    qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";
+}
+bool NativeApp::needUpdate()
+{
+       qDebug() << "THIS EVENT WAS INVOKED AT PC VERSION. HAS NO EVENT.";
+}
+
 #endif
 

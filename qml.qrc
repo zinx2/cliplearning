@@ -21,9 +21,7 @@
         <file>qml/PGBoardData.qml</file>
         <file>qml/PGBoardNotice.qml</file>
         <file>qml/PGBoardQnA.qml</file>
-        <file>qml/PGDrawer.qml</file>
         <file>qml/PGHome.qml</file>
-        <file>qml/PGHome2.qml</file>
         <file>qml/PGJoinDesk.qml</file>
         <file>qml/PGJoinEmail.qml</file>
         <file>qml/PGJoinSNS.qml</file>
@@ -47,5 +45,7 @@
         <file>qml/PGCourseDesk.qml</file>
         <file>qml/CPTextBold.qml</file>
         <file>qml/CPAlarmPopup.qml</file>
+        <file>qml/PGMyPage.qml</file>
+        <file>qml/NU_PGDrawer.qml</file>
     </qresource>
 </RCC>

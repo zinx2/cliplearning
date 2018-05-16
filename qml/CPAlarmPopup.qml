@@ -12,7 +12,7 @@ Rectangle
     width: R.design_size_width
     height: R.design_size_height
     color: "#44000000"
-    visible: opt.ds ? false : md.popup.visible
+    visible: opt.ds ? false : ap.visible
 
 
     MouseArea

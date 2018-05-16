@@ -445,12 +445,13 @@ Paper {
             id: componentTab1
             PGTab1
             {
-                width: parent.width
-                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                width: loader.width
+                height: loader.height + (R.height_statusbar + R.height_titlaBar)
                 y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
-                    mainView.titleText = "<font color='" + R.color_theme01 +"'>CLIP</font>" +"<font color='black'> LEARNING</font>"
+                    mainView.titleType = 1;
+                    mainView.titleText = ""
                     mainView.titleLineColor = R.color_theme01
                     if(opt.ds) return;
 
@@ -464,11 +465,12 @@ Paper {
             id: componentTab2
             PGTab2
             {
-                width: parent.width
-                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                width: loader.width
+                height: loader.height + (R.height_statusbar + R.height_titlaBar)
                 y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
+                    mainView.titleType = 0;
                     mainView.titleText = "<font color='black'>알림</font>"
                     mainView.titleLineColor = "black"
                     if(opt.ds) return;
@@ -483,11 +485,12 @@ Paper {
             id: componentTab3
             PGTab3
             {
-                width: parent.width
-                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                width: loader.width
+                height: loader.height + (R.height_statusbar + R.height_titlaBar)
                 y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
+                    mainView.titleType = 0;
                     mainView.titleText = "<font color='black'>검색</font>"
                     mainView.titleLineColor = "black"
                     if(opt.ds) return;
@@ -502,11 +505,12 @@ Paper {
             id: componentTab4
             PGTab4
             {
-                width: parent.width
-                height: parent.height + (R.height_statusbar + R.height_titlaBar)
+                width: loader.width
+                height: loader.height + (R.height_statusbar + R.height_titlaBar)
                 y: R.height_statusbar + R.height_titlaBar
                 Component.onCompleted:
                 {
+                    mainView.titleType = 0;
                     mainView.titleText = "<font color='black'>좋아요</font>"
                     mainView.titleLineColor = "black"
                     if(opt.ds) return;
@@ -516,6 +520,46 @@ Paper {
 
                     wk.getLikeClipList(0);
                     wk.request();
+                }
+            }
+        }
+
+        Component
+        {
+            id: componentTab5
+            PGLoginDesk
+            {
+                width: loader.width
+                height: loader.height + (R.height_statusbar + R.height_titlaBar)
+                y: R.height_statusbar + R.height_titlaBar
+                Component.onCompleted:
+                {
+                    mainView.titleType = 0;
+                    mainView.titleText = "<font color='black'>로그인</font>"
+                    mainView.titleLineColor = "black"
+                    if(opt.ds) return;
+
+                    md.setHomeScrolled(true);
+                }
+            }
+        }
+
+        Component
+        {
+            id: componentTab6
+            PGMyPage
+            {
+                width: loader.width
+                height: loader.height + (R.height_statusbar + R.height_titlaBar)
+                y: R.height_statusbar + R.height_titlaBar
+                Component.onCompleted:
+                {
+                    mainView.titleType = 0;
+                    mainView.titleText = "<font color='black'>마이페이지</font>"
+                    mainView.titleLineColor = "black"
+                    if(opt.ds) return;
+
+                    md.setHomeScrolled(true);
                 }
             }
         }
@@ -573,7 +617,14 @@ Paper {
                                 case 1: loader.sourceComponent = componentTab2; break;
                                 case 2: loader.sourceComponent = componentTab3; break;
                                 case 3: loader.sourceComponent = componentTab4; break;
-                                case 4: loader.sourceComponent = componentTab4; break;
+                                case 4:
+                                {
+                                    if(!settings.logined)
+                                        loader.sourceComponent = componentTab6;
+                                    else
+                                        loader.sourceComponent = componentTab5;
+                                    break;
+                                }
                                 }
 
                                 for(var i=0; i<md.tablist.length; i++)

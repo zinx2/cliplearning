@@ -121,9 +121,11 @@ Rectangle
                 width: parent.width
                 height: R.dp(500)
 
-                CPBusyIndicatorEKr {
+                CPBusyIndicatorEKr
+                {
                     id: viewPagerBusy
-                    anchors {
+                    anchors
+                    {
                         left: parent.left
                         leftMargin: parent.width*0.5 - viewPagerBusy.width + R.dp(20)
                         verticalCenter: parent.verticalCenter
@@ -284,7 +286,6 @@ Rectangle
                         }
                     }
                 }
-
             }
 
             Rectangle

@@ -107,18 +107,18 @@ Rectangle {
 //        }
 
         /* 테스트용 */
-        CPButton
-        {
-            sourceWidth: parent.width
-            sourceHeight: R.height_button_middle
-            btnName: "홈으로"
-            rectColor: R.color_buttonColor001
-            textColor: "white"
-            onClicked:
-            {
-                settings.setLogined(true);
-            }
-        }
+//        CPButton
+//        {
+//            sourceWidth: parent.width
+//            sourceHeight: R.height_button_middle
+//            btnName: "홈으로"
+//            rectColor: R.color_buttonColor001
+//            textColor: "white"
+//            onClicked:
+//            {
+//                settings.setLogined(true);
+//            }
+//        }
 
         /* 테스트용 */
         CPButton

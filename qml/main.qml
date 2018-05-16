@@ -43,7 +43,7 @@ ApplicationWindow {
 
 
         cmd.setStatusBarColor(R.color_appTitlebar);
-        if(cmd.isOnline())
+        if(cmd.isOnline() || (Qt.platform.os !== "android" && Qt.platform.os !== "ios"))
         {
             fadeoutTimer.running = true;
 
@@ -62,24 +62,24 @@ ApplicationWindow {
     {
         id: userStackView
         anchors.fill: parent
-        visible: !settings.logined
+//        visible: !settings.logined
         //        visible: false
 
-        initialItem: PGLoginDesk
-        {
-            width: opt.ds ? R.design_size_width : userStackView.width
-            height: opt.ds ? R.design_size_height : userStackView.height
+//        initialItem: PGLoginDesk
+//        {
+//            width: opt.ds ? R.design_size_width : userStackView.width
+//            height: opt.ds ? R.design_size_height : userStackView.height
 
-            Component.onCompleted: {
-                /* When Logined... AutoLogin. */
-                console.log("Component.onCompleted : " + settings.logined);
-                console.log("Device ID: " + cmd.getDeviceId());
-                if(settings.logined) {
-                    homeStackView.clear();
-                    homeStackView.push(Qt.createComponent(R.view_file_home), { });
-                }
-            }
-        }
+//            Component.onCompleted: {
+//                /* When Logined... AutoLogin. */
+//                console.log("Component.onCompleted : " + settings.logined);
+//                console.log("Device ID: " + cmd.getDeviceId());
+//                if(settings.logined) {
+//                    homeStackView.clear();
+//                    homeStackView.push(Qt.createComponent(R.view_file_home), { });
+//                }
+//            }
+//        }
     }
 
     StackView

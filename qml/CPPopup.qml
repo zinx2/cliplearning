@@ -3,12 +3,17 @@ import QtQuick.Controls 1.4
 import "Resources.js" as R
 Rectangle
 {
-    signal evtBack()
-    signal evtCallback(variant obj)
+    id: rect
+    signal evtYes()
+    signal evtNo()
 
-        width: R.design_size_width
-        height: R.design_size_height
+    property string msg : "인증번호가 전송되었습니다."
+    property int buttonCount : 2
+    width: R.design_size_width
+    height: R.design_size_height
     color: "#44000000"
+    visible: opt.ds ? true : false
+
 
     MouseArea
     {
@@ -16,18 +21,17 @@ Rectangle
         height: parent.height
         onClicked:
         {
-            evtBack()
+            rect.visible = false
         }
     }
 
     Rectangle
     {
         id: popup
-        width: parent.width * 0.8
-        height: parent.height * 0.8 + R.height_titlaBar
-        color: "white"
-        //        radius: 5
-        //        border.width: 1
+        width: rect.width - R.dp(280)
+        height: R.dp(500)
+        color: "transparent"
+
         anchors
         {
             verticalCenter: parent.verticalCenter
@@ -41,279 +45,103 @@ Rectangle
 
             Rectangle
             {
-                id: titleBar
-                height: R.height_titlaBar
+                id: msgRect
+                height: R.dp(360)
                 width: parent.width
-                color: R.color_appTitlebar
+                border.width: R.dp(2)
+                border.color: "#f5f6f6"
+                color: "white"
 
-                CPButton
+                CPText
                 {
-                    id: btnBack
-                    width: parent.height
-                    height: parent.height
-                    sourceWidth: R.dp(100)
-                    sourceHeight: R.dp(100)
-                    imageSource: R.image("close_white.png")
-                    type: "image"
-                    onClicked:
-                    {
-                        evtBack()
-                    }
+                    width: parent.width
+                    height: R.dp(80)
                     anchors
                     {
-                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        horizontalCenter: parent.horizontalCenter
                     }
-                }
 
-                Label
-                {
-                    width: parent.width
-                    height: parent.height
-                    text: "공학변수 선택"
-                    color: R.color_appTitleText
+                    text: msg
+                    color: "black"
                     horizontalAlignment : Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    font.pointSize: R.pt(24)
-                    font.family: fontNanumBarunGothic.name
-                    FontLoader {
-                        id: fontNanumBarunGothic
-                        source: R.os() === "android" ? R.font("NanumBarunGothic_android.ttf") : R.font("NanumBarunGothic_ios.ttf")
-                    }
+                    font.pointSize: R.pt(18)
                 }
             }
 
-            Loader
+            Rectangle
             {
-                id: loader
+                id: btnRect
                 width: parent.width
-                height: parent.height - titleBar.height
-            }
+                height: R.dp(140)
 
-            Component
-            {
-                id: component
-                Flickable
+                Row
                 {
                     width: parent.width
-                    height: parent.height - titleBar.height
-                    interactive: false
-                    ScrollView
+                    height: R.dp(140)
+
+                    Rectangle
                     {
-                        clip: true
-                        width: parent.width
+                        id: btnNo
+                        width: buttonCount > 1 ? parent.width * 0.5 : 0
                         height: parent.height
-                        horizontalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-//                        verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
-                        anchors
+                        color: R.color_bgColor002
+
+                        CPText
                         {
-                            //                    verticalCenter: parent.verticalCenter
-                            horizontalCenter: parent.horizontalCenter
+                            width: parent.width
+                            height: parent.height
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            color: "white"
+                            font.pointSize: R.pt(16)
+                            text: "아니오"
                         }
 
-                        Column
+                        MouseArea
                         {
-                            Repeater
+                            anchors.fill: parent
+                            onClicked:
                             {
-                                id: repeater
-                                model: opt.ds ? ds_model : md.eng
-                                Rectangle
-                                {
-                                    width: popup.width
-                                    height: R.dp(120) + 1
-                                    color: ma.pressed ? R.color_buttonPressed : "white"
+                                console.log("CLOSED POPUP.");
+                                rect.visible = false;
+                                evtNo();
+                            }
+                        }
+                    }
 
-                                    Column
-                                    {
-                                        width: parent.width
-                                        height: parent.height
-                                        Rectangle
-                                        {
-                                            width: parent.width
-                                            height: parent.height - 1
-                                            color: "transparent"
-                                            CPText {
-                                                verticalAlignment: Text.AlignVCenter
-                                                horizontalAlignment: Text.AlignLeft
-                                                height: parent.height
-                                                font.pointSize: R.pt(15)
-                                                text: opt.ds ? name : "   " + ((model.modelData.id+1) + ". " + model.modelData.name)
-                                            }
-                                        }
-                                        Rectangle
-                                        {
-                                            width: parent.width
-                                            height: 1
-                                            color: index === (md.eng.length-1) ? "white" : "black"
-                                        }
-                                    }
+                    Rectangle
+                    {
+                        id: btnYes
+                        width: buttonCount > 1 ? parent.width * 0.5 : parent.width
+                        height: parent.height
+                        color: R.color_bgColor001
 
-                                    MouseArea
-                                    {
-                                        id: ma
-                                        width: parent.width
-                                        height: parent.height
-                                        onClicked:
-                                        {
-                                            var obj = {
-                                                "no" : (opt.ds ? number : (model.modelData.id + 1)) + ". ",
-                                                "name" : opt.ds ? name : model.modelData.name
-                                            }
+                        CPText
+                        {
+                            width: parent.width
+                            height: parent.height
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+                            color: "white"
+                            font.pointSize: R.pt(16)
+                            text: buttonCount > 1 ? "예" : "확인"
+                        }
 
-                                            evtCallback(obj);
-                                            evtBack();
-                                        }
-                                    }
-                                }
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            onClicked:
+                            {
+                                console.log("CLOSED POPUP.");
+                                rect.visible = false;
+                                evtYes();
                             }
                         }
                     }
                 }
             }
-        }
-    }
-
-    Component.onCompleted:
-    {
-        viewTrigger.start();
-    }
-    Timer
-    {
-        id: viewTrigger
-        interval: 100
-        repeat: false
-        onTriggered:
-        {
-            loader.sourceComponent = component;
-        }
-    }
-
-    ListModel {
-        id: ds_model
-        ListElement {
-            name: "Bill Smith"
-            number: "0"
-            content: "conttetwetpwfjpwefpojwepofjw234234pojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojefconttetwetpwfjpwefpojwepofjwpojef555"
-            text: "AAA"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "1"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-            text: "BBB"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "2"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-            text: "CCC"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "3"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-            text: "DDD"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "4"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-            text: "EEE"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "5"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-            text: "FFF"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "6"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "7"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "8"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "9"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "10"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "11"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "12"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "13"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "14"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "15"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "16"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "17"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "18"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "19"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "20"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Bill Smith"
-            number: "21"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "John Brown"
-            number: "22"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
-        }
-        ListElement {
-            name: "Sam Wise"
-            number: "23"
-            content: "conttetwetpwfjpwefpojwepofjwpojef"
         }
     }
 }

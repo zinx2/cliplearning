@@ -21,7 +21,7 @@ function toTime(mSecs)
 }
 
 var height_statusbar = Qt.platform.os == "ios" ? 20 : 0
-var height_titlaBar = dp(144);
+var height_titlaBar = dp(120);
 var height_button_middle = dp(144);
 
 var color_appTitlebar = "#ffffff"
@@ -32,6 +32,7 @@ var color_theme01 = "#fa7070"
 
 var color_bgColor001 = "#fa7070"
 var color_bgColor002 = "#f9acac"
+var color_bgColor003 = "#ffe9e9"
 var color_buttonColor001 = "#5460e0"
 
 var color_orange = "#f6712a"

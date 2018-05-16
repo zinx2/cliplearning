@@ -1,4 +1,4 @@
-QT += quick quickcontrols2 network webview qml
+QT += quick quickcontrols2 network qml
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use

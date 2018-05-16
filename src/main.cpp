@@ -10,7 +10,7 @@
 #include "imageresponseprovider.h"
 #include <QThread>
 #include <QSettings>
-#include <QtWebView/QtWebView>
+//#include <QtWebView/QtWebView>
 //#include <qtwebengineglobal.h>
 
 int main(int argc, char *argv[])

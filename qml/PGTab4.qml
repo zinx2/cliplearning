@@ -314,7 +314,7 @@ Rectangle
                                         width: R.dp(50)
                                         height: R.dp(50)
                                         fillMode: Image.PreserveAspectFit
-                                        source: opt.ds ? R.image("favorite_released_36dp.png") : (md.likecliplist[index].myLike ? R.image("favorite_pressed_36dp.png") : R.image("favorite_released_36dp.png"))
+                                        source: opt.ds ? R.image("like.png") : (md.likecliplist[index].myLike ? R.image("like_pink.png") : R.image("like.png"))
                                         anchors
                                         {
                                             horizontalCenter: parent.horizontalCenter
@@ -328,7 +328,7 @@ Rectangle
                                         {
                                             if(opt.ds)
                                             {
-                                                likeImg.source = R.image("favorite_pressed_36dp.png");
+                                                likeImg.source = R.image("like_pink.png");
                                                 likeTxt.color = R.color_theme01;
                                                 return;
                                             }
